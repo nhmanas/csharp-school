@@ -29,5 +29,24 @@ namespace School_Automation_Collab
         {
 
         }
+
+        private void loginButton_Click(object sender, RoutedEventArgs e)
+        {
+            // May create another window for alerts, messagebox is ugly
+
+            if (idBox.Text=="")
+            {
+                MessageBox.Show("Fill ID Number!");
+                return;
+            }
+            if (pwBox.Password == "")
+            {
+                MessageBox.Show("Fill Password!");
+                return;
+            }
+            MessageBox.Show("Waiting for db Bedirhan hurry");
+        }
+
+
     }
 }
