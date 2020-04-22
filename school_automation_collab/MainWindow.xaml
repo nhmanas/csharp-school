@@ -9,23 +9,23 @@
     <Grid>
         <Rectangle Fill="#FF1976D3" HorizontalAlignment="Left" Height="658" Margin="504,0,0,-9" Stroke="Black" VerticalAlignment="Top" Width="488" Grid.IsSharedSizeScope="True"/>
 
-        <TextBlock HorizontalAlignment="Left" Margin="554,128,0,0" TextWrapping="Wrap" Text="Sign in" VerticalAlignment="Top" FontSize="48" TextDecorations="{x:Null}" Foreground="#FFFFFFFF"/>
-        <TextBlock HorizontalAlignment="Left" Margin="782,128,0,0" TextWrapping="Wrap" Text="Sign up" VerticalAlignment="Top" FontSize="48" TextDecorations="{x:Null}" Foreground="#FF569DE5">
+        <TextBlock x:Name="signinTab" HorizontalAlignment="Left" Margin="554,128,0,0" TextWrapping="Wrap" Text="Sign in" VerticalAlignment="Top" FontSize="48" TextDecorations="{x:Null}" Foreground="#FFFFFFFF"/>
+        <TextBlock x:Name="signupTab" HorizontalAlignment="Left" Margin="782,128,0,0" TextWrapping="Wrap" Text="Sign up" VerticalAlignment="Top" FontSize="48" TextDecorations="{x:Null}" Foreground="#FF569DE5">
             <TextBlock.Effect>
                 <BlurEffect Radius="7"/>
             </TextBlock.Effect>
         </TextBlock>
         <TextBlock HorizontalAlignment="Left" Margin="724,141,0,0" TextWrapping="Wrap" Text="or" VerticalAlignment="Top" FontSize="36" TextDecorations="{x:Null}" Foreground="#FF569DE5"/>
-        <TextBox HorizontalAlignment="Left" Height="29" Margin="553,279,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="390" FontSize="18" Background="#FF1976D3" BorderBrush="White" BorderThickness="5,1,1,1" Foreground="White"/>
+        <TextBox x:Name="idBox" HorizontalAlignment="Left" Height="29" Margin="553,279,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="390" FontSize="18" Background="#FF1976D3" BorderBrush="White" BorderThickness="5,1,1,1" Foreground="White"/>
         <TextBlock HorizontalAlignment="Left" Margin="553,241,0,0" TextWrapping="Wrap" Text="ID Number: " VerticalAlignment="Top" FontSize="16" TextDecorations="{x:Null}" Foreground="#FFFFFFFF"/>
-        <TextBox HorizontalAlignment="Left" Height="29" Margin="554,385,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="389" FontSize="18" Background="#FF1976D3" BorderBrush="White" BorderThickness="5,1,1,1" Foreground="White"/>
-        <TextBlock HorizontalAlignment="Left" Margin="553,347,0,0" TextWrapping="Wrap" Text="Password:" VerticalAlignment="Top" FontSize="16" TextDecorations="{x:Null}" Foreground="#FFFFFFFF"/>
+		<TextBlock HorizontalAlignment="Left" Margin="553,347,0,0" TextWrapping="Wrap" Text="Password:" VerticalAlignment="Top" FontSize="16" TextDecorations="{x:Null}" Foreground="#FFFFFFFF"/>
         <Label Content="Hello world!" HorizontalAlignment="Left" Margin="144,57,0,0" VerticalAlignment="Top" FontSize="36" Foreground="#FF464646"/>
         <Label Content="We design worlds to make " HorizontalAlignment="Left" Margin="100,507,0,0" VerticalAlignment="Top" FontSize="25" Foreground="#FF464646"/>
         <Label Content="everything smaller" HorizontalAlignment="Left" Margin="100,550,0,0" VerticalAlignment="Top" FontSize="36" Foreground="#FF464646"/>
-        <CheckBox Content="Remember me" HorizontalAlignment="Left" Margin="554,436,0,0" VerticalAlignment="Top" Foreground="White"/>
-        <Button Content="Login" HorizontalAlignment="Left" Margin="827,427,0,0" VerticalAlignment="Top" Width="116" Background="#FF1976D3" FontSize="16" BorderBrush="White" Foreground="White" Height="29"/>
+        <CheckBox x:Name="rememberCheck" Content="Remember me" HorizontalAlignment="Left" Margin="554,436,0,0" VerticalAlignment="Top" Foreground="White"/>
+        <Button x:Name="loginButton" Content="Login" HorizontalAlignment="Left" Margin="827,427,0,0" VerticalAlignment="Top" Width="116" Background="#FF1976D3" FontSize="16" BorderBrush="White" Foreground="White" Height="29"/>
         <Image HorizontalAlignment="Left" Height="330" Margin="80,143,0,0" VerticalAlignment="Top" Width="341" Source="toros.png"/>
+		<PasswordBox x:Name="pwBox" HorizontalAlignment="Left" Margin="554,385,0,0" VerticalAlignment="Top" Width="389" Height="29" FontSize="18" Background="#FF1976D3" BorderBrush="White" Foreground="White"/>
 
-    </Grid>
+	</Grid>
 </Window>
