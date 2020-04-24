@@ -16,7 +16,7 @@ namespace School_Automation_Collab.sql
             List<List<string>> all = new List<List<string>>();
             
             var dbCon =new DBConnection();
-            dbCon.DatabaseName = "viovasof_cse";
+            dbCon.DatabaseName = "toros_database";
             if (dbCon.IsConnect())
             {
                 //suppose col0 and col1 are defined as VARCHAR in the DB
