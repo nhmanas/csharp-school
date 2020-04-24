@@ -28,3 +28,5 @@ C:\Users\Nhmanas\Desktop\csharp\school_automation_collab\obj\Debug\School Automa
 C:\Users\Nhmanas\Desktop\csharp\school_automation_collab\obj\Debug\School Automation Collab.csproj.CoreCompileInputs.cache
 C:\Users\Nhmanas\Desktop\csharp\school_automation_collab\obj\Debug\School Automation Collab.exe
 C:\Users\Nhmanas\Desktop\csharp\school_automation_collab\obj\Debug\School Automation Collab.pdb
+C:\Users\Nhmanas\Desktop\csharp\school_automation_collab\obj\Debug\Window1.g.cs
+C:\Users\Nhmanas\Desktop\csharp\school_automation_collab\obj\Debug\Window1.baml
