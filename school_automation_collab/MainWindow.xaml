@@ -26,7 +26,7 @@
         <Label Content="This is Toros University" HorizontalAlignment="Left" Margin="117,507,0,0" VerticalAlignment="Top" FontSize="25" Foreground="#FF464646"/>
         <Label Content="SAIS" HorizontalAlignment="Left" Margin="203,555,0,0" VerticalAlignment="Top" FontSize="36" Foreground="#FF464646"/>
         <CheckBox x:Name="rememberCheck" Content="Remember me" HorizontalAlignment="Left" Margin="554,436,0,0" VerticalAlignment="Top" Foreground="White"/>
-        <Button x:Name="loginButton" Content="Login" HorizontalAlignment="Left" Margin="827,427,0,0" VerticalAlignment="Top" Width="116" Background="#FF1976D3" FontSize="16" BorderBrush="White" Foreground="White" Height="29"/>
+        <Button x:Name="loginButton" Content="Login" HorizontalAlignment="Left" Margin="827,427,0,0" VerticalAlignment="Top" Width="116" Background="#FF1976D3" FontSize="16" BorderBrush="White" Foreground="White" Height="29" Click="loginButton_Click"/>
         <Image HorizontalAlignment="Left" Height="330" Margin="80,143,0,0" VerticalAlignment="Top" Width="341" Source="toros.png"/>
         <PasswordBox x:Name="pwBox" HorizontalAlignment="Left" Margin="554,385,0,0" VerticalAlignment="Top" Width="389" Height="29" FontSize="18" Background="#FF1976D3" BorderBrush="White" Foreground="White" BorderThickness="5,1,1,1"/>
 

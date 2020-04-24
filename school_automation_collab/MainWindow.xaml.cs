@@ -14,7 +14,11 @@ using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+
+using static School_Automation_Collab.sql.Database;
+
 using System.Windows.Media.Animation;
+
 
 namespace School_Automation_Collab
 {
@@ -23,8 +27,12 @@ namespace School_Automation_Collab
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        
+
         public int isClickedUp = 0, isClickedIn = 1, wasClickedIn = 1, wasClickedUp = 0;
         public string colorMain = "#FF1976D3", colorInactive = "#FF569DE5", colorHover = "#FF9FBFE0", colorActive = "#FFFFFFFF";
+
         public MainWindow()
         {
             InitializeComponent();
@@ -114,6 +122,42 @@ namespace School_Automation_Collab
                 isClickedUp = 1;
             }
         }
+
+        private void loginButton_Click(object sender, RoutedEventArgs e)
+        {
+            // May create another window for alerts, messagebox is ugly
+
+            if (idBox.Text=="")
+            {
+                MessageBox.Show("Fill ID Number!");
+                return;
+            }
+            if (pwBox.Password == "")
+            {
+                MessageBox.Show("Fill Password!");
+                return;
+            }
+            //MessageBox.Show("Waiting for db Bedirhan hurry");
+            School_Automation_Collab.sql.Database connection = new School_Automation_Collab.sql.Database();
+
+
+
+            var check=connection.select("access", "userid,pass", $"userid='{idBox.Text}' and pass='{pwBox.Password}'");
+            if (check.Count == 0)
+            {
+                MessageBox.Show("Incorrect username or password");
+            }
+            else if (check.Count > 1)
+            {
+                MessageBox.Show("There are multiple entries in the db");
+            }
+            else
+            {
+                MessageBox.Show("Welcome");
+            }
+        }
+
+
     }
     //signup END
 }
