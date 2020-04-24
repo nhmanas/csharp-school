@@ -41,9 +41,13 @@ namespace School_Automation_Collab.sql
                 }
                 //test
                 dbCon.Close();
-                
+                return all;
             }
-            return all;
+            else
+            {
+                return null
+            }
+            
         }
 
     }

@@ -143,7 +143,11 @@ namespace School_Automation_Collab
 
 
             var check=connection.select("access", "userid,pass", $"userid='{idBox.Text}' and pass='{pwBox.Password}'");
-            if (check.Count == 0)
+            if (check == null)
+            {
+                MessageBox.Show("Connection to db failed");
+            }
+            else if (check.Count == 0)
             {
                 MessageBox.Show("Incorrect username or password");
             }
