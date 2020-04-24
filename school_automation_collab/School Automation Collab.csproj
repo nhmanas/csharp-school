@@ -35,8 +35,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MySql.Data, Version=8.0.19.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>packages\MySql.Data.8.0.19\lib\net452\MySql.Data.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -45,6 +56,9 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="Ubiety.Dns.Core, Version=2.2.1.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>packages\MySql.Data.8.0.19\lib\net452\Ubiety.Dns.Core.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
@@ -55,6 +69,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="sql\Database.cs" />
+    <Compile Include="sql\DBConnection.cs" />
     <Compile Include="Window1.xaml.cs">
       <DependentUpon>Window1.xaml</DependentUpon>
     </Compile>
@@ -93,6 +109,16 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="packages\BouncyCastle.1.8.3.1\.signature.p7s" />
+    <None Include="packages\BouncyCastle.1.8.3.1\BouncyCastle.1.8.3.1.nupkg" />
+    <None Include="packages\BouncyCastle.1.8.3.1\README.md" />
+    <None Include="packages\Google.Protobuf.3.6.1\.signature.p7s" />
+    <None Include="packages\Google.Protobuf.3.6.1\Google.Protobuf.3.6.1.nupkg" />
+    <None Include="packages\MySql.Data.8.0.19\.signature.p7s" />
+    <None Include="packages\MySql.Data.8.0.19\MySql.Data.8.0.19.nupkg" />
+    <None Include="packages\SSH.NET.2016.1.0\.signature.p7s" />
+    <None Include="packages\SSH.NET.2016.1.0\SSH.NET.2016.1.0.nupkg" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -106,6 +132,41 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="toros.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages\BouncyCastle.1.8.3.1\lib\BouncyCastle.Crypto.dll" />
+    <Content Include="packages\Google.Protobuf.3.6.1\lib\net45\Google.Protobuf.dll" />
+    <Resource Include="packages\Google.Protobuf.3.6.1\lib\net45\Google.Protobuf.xml" />
+    <Content Include="packages\Google.Protobuf.3.6.1\lib\netstandard1.0\Google.Protobuf.dll" />
+    <Resource Include="packages\Google.Protobuf.3.6.1\lib\netstandard1.0\Google.Protobuf.xml" />
+    <Content Include="packages\MySql.Data.8.0.19\lib\net452\MySql.Data.dll" />
+    <Resource Include="packages\MySql.Data.8.0.19\lib\net452\MySql.Data.xml" />
+    <Content Include="packages\MySql.Data.8.0.19\lib\net452\Ubiety.Dns.Core.dll" />
+    <Content Include="packages\MySql.Data.8.0.19\lib\net48\MySql.Data.dll" />
+    <Resource Include="packages\MySql.Data.8.0.19\lib\net48\MySql.Data.xml" />
+    <Content Include="packages\MySql.Data.8.0.19\lib\net48\Ubiety.Dns.Core.dll" />
+    <Content Include="packages\MySql.Data.8.0.19\lib\netstandard2.0\MySql.Data.dll" />
+    <Resource Include="packages\MySql.Data.8.0.19\lib\netstandard2.0\MySql.Data.xml" />
+    <Content Include="packages\MySql.Data.8.0.19\lib\netstandard2.0\Ubiety.Dns.Core.dll" />
+    <Content Include="packages\MySql.Data.8.0.19\lib\netstandard2.1\MySql.Data.dll" />
+    <Resource Include="packages\MySql.Data.8.0.19\lib\netstandard2.1\MySql.Data.xml" />
+    <Content Include="packages\MySql.Data.8.0.19\lib\netstandard2.1\Ubiety.Dns.Core.dll" />
+    <Content Include="packages\SSH.NET.2016.1.0\lib\net35\Renci.SshNet.dll" />
+    <Resource Include="packages\SSH.NET.2016.1.0\lib\net35\Renci.SshNet.xml" />
+    <Content Include="packages\SSH.NET.2016.1.0\lib\net40\Renci.SshNet.dll" />
+    <Resource Include="packages\SSH.NET.2016.1.0\lib\net40\Renci.SshNet.xml" />
+    <Content Include="packages\SSH.NET.2016.1.0\lib\netstandard1.3\Renci.SshNet.dll" />
+    <Resource Include="packages\SSH.NET.2016.1.0\lib\netstandard1.3\Renci.SshNet.xml" />
+    <Content Include="packages\SSH.NET.2016.1.0\lib\sl4\Renci.SshNet.dll" />
+    <Resource Include="packages\SSH.NET.2016.1.0\lib\sl4\Renci.SshNet.xml" />
+    <Content Include="packages\SSH.NET.2016.1.0\lib\sl5\Renci.SshNet.dll" />
+    <Resource Include="packages\SSH.NET.2016.1.0\lib\sl5\Renci.SshNet.xml" />
+    <Content Include="packages\SSH.NET.2016.1.0\lib\uap10\Renci.SshNet.dll" />
+    <Resource Include="packages\SSH.NET.2016.1.0\lib\uap10\Renci.SshNet.xml" />
+    <Content Include="packages\SSH.NET.2016.1.0\lib\wp71\Renci.SshNet.dll" />
+    <Resource Include="packages\SSH.NET.2016.1.0\lib\wp71\Renci.SshNet.xml" />
+    <Content Include="packages\SSH.NET.2016.1.0\lib\wp8\Renci.SshNet.dll" />
+    <Resource Include="packages\SSH.NET.2016.1.0\lib\wp8\Renci.SshNet.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
