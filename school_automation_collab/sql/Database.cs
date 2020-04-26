@@ -45,7 +45,7 @@ namespace School_Automation_Collab.sql
             }
             else
             {
-                return null
+                return null;
             }
             
         }

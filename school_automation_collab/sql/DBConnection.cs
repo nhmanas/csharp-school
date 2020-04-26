@@ -53,7 +53,7 @@ namespace School_Automation_Collab.sql
                 {
 
                     MessageBox.Show(e +"\nProbably database isn't maria db");
-                    return false
+                    return false;
                 }
                 
             }
