@@ -45,16 +45,7 @@ namespace School_Automation_Collab.sql
                     return false;
                 string connstring = string.Format("Server=localhost; database='{0}'; UID='root'; password=''", databaseName);
                 connection = new MySqlConnection(connstring);
-                try
-                {
-                    connection.Open();
-                }
-                catch (Exception e )
-                {
-
-                    MessageBox.Show(e +"\nProbably database isn't maria db");
-                    return false;
-                }
+                
                 
             }
 

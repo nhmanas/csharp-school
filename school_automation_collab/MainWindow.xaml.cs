@@ -29,9 +29,12 @@ namespace School_Automation_Collab
     {
 
         
+        //how do i know i am in the register or login please comment
+        private int isClickedUp = 0, isClickedIn = 1, wasClickedIn = 1, wasClickedUp = 0;
+        
 
-        public int isClickedUp = 0, isClickedIn = 1, wasClickedIn = 1, wasClickedUp = 0;
-        public string colorMain = "#FF1976D3", colorInactive = "#FF569DE5", colorHover = "#FF9FBFE0", colorActive = "#FFFFFFFF";
+        // this isn't used ??
+        private string colorMain = "#FF1976D3", colorInactive = "#FF569DE5", colorHover = "#FF9FBFE0", colorActive = "#FFFFFFFF";
 
         public MainWindow()
         {
@@ -138,20 +141,25 @@ namespace School_Automation_Collab
                 return;
             }
             //MessageBox.Show("Waiting for db Bedirhan hurry");
-            School_Automation_Collab.sql.Database connection = new School_Automation_Collab.sql.Database();
+            sql.Database connection = new sql.Database();
+            List<sql.cmdParameterType> lstParams = new List<sql.cmdParameterType> {
+                new sql.cmdParameterType("@userid", idBox.Text.Trim().ToLower()),
+                new sql.cmdParameterType("@pass", pwBox.Password) };
+
+            var query = "select userid, pass from access where userid=@userid and pass=@pass";
 
 
 
-            var check=connection.select("access", "userid,pass", $"userid='{idBox.Text}' and pass='{pwBox.Password}'");
+            var check=connection.query(query,lstParams);
             if (check == null)
             {
                 MessageBox.Show("Connection to db failed");
             }
-            else if (check.Count == 0)
+            else if (check.Rows.Count == 0)
             {
                 MessageBox.Show("Incorrect username or password");
             }
-            else if (check.Count > 1)
+            else if (check.Rows.Count > 1)
             {
                 MessageBox.Show("There are multiple entries in the db");
             }
