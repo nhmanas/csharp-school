@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:School_Automation_Collab"
         mc:Ignorable="d"
-        Title="MainWindow" Height="680" Width="1000" WindowStyle="SingleBorderWindow" MaxHeight="680" MaxWidth="1000" MinHeight="680" MinWidth="1000">
+        Title="MainWindow" Height="680" Width="1000" WindowStyle="SingleBorderWindow" MaxHeight="680" MaxWidth="1000" MinHeight="680" MinWidth="1000" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize">
     <Grid>
 
         <Rectangle Fill="#FF1976D3" HorizontalAlignment="Left" Height="658" Margin="504,0,0,-9" Stroke="Black" VerticalAlignment="Top" Width="488" Grid.IsSharedSizeScope="True"/>
@@ -16,7 +16,7 @@
             <TextBlock.Effect>
                 <BlurEffect/>
             </TextBlock.Effect>
-            
+
         </TextBlock>
         <TextBlock HorizontalAlignment="Left" Margin="724,141,0,0" TextWrapping="Wrap" Text="or" VerticalAlignment="Top" FontSize="36" TextDecorations="{x:Null}" Foreground="#FF569DE5"/>
         <TextBox x:Name="idBox" HorizontalAlignment="Left" Height="29" Margin="553,279,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="390" FontSize="18" Background="#FF1976D3" BorderBrush="White" BorderThickness="5,1,1,1" Foreground="White"/>
@@ -29,6 +29,7 @@
         <Button x:Name="loginButton" Content="Login" HorizontalAlignment="Left" Margin="827,427,0,0" VerticalAlignment="Top" Width="116" Background="#FF1976D3" FontSize="16" BorderBrush="White" Foreground="White" Height="29" Click="loginButton_Click"/>
         <Image HorizontalAlignment="Left" Height="330" Margin="80,143,0,0" VerticalAlignment="Top" Width="341" Source="toros.png"/>
         <PasswordBox x:Name="pwBox" HorizontalAlignment="Left" Margin="554,385,0,0" VerticalAlignment="Top" Width="389" Height="29" FontSize="18" Background="#FF1976D3" BorderBrush="White" Foreground="White" BorderThickness="5,1,1,1"/>
+        <Rectangle x:Name="warningBox" Fill="#FFD31919" HorizontalAlignment="Left" Height="72" Margin="553,507,0,0" Stroke="White" VerticalAlignment="Top" Width="390"/>
 
     </Grid>
 </Window>

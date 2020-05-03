@@ -31,11 +31,12 @@ namespace School_Automation_Collab
         
 
         public int isClickedUp = 0, isClickedIn = 1, wasClickedIn = 1, wasClickedUp = 0;
-        public string colorMain = "#FF1976D3", colorInactive = "#FF569DE5", colorHover = "#FF9FBFE0", colorActive = "#FFFFFFFF";
+        public string colorMain = "#FF1976D3", colorInactive = "#FF569DE5", colorHover = "#FF9FBFE0", colorActive = "#FFFFFFFF", colorError = "#FF5D0052", colorWarning = "#FFFFBE00", colorOK = "#FF61B600";
 
         public MainWindow()
         {
             InitializeComponent();
+            warningBox.Visibility = Visibility.Hidden;
         }
 
         //signin START
@@ -127,7 +128,7 @@ namespace School_Automation_Collab
         {
             // May create another window for alerts, messagebox is ugly
 
-            if (idBox.Text=="")
+            if (idBox.Text == "")
             {
                 MessageBox.Show("Fill ID Number!");
                 return;
@@ -142,19 +143,31 @@ namespace School_Automation_Collab
 
 
 
-            var check=connection.select("access", "userid,pass", $"userid='{idBox.Text}' and pass='{pwBox.Password}'");
+            var check = connection.select("access", "userid,pass", $"userid='{idBox.Text}' and pass='{pwBox.Password}'");
             if (check.Count == 0)
             {
                 MessageBox.Show("Incorrect username or password");
+                warningBox.Visibility = Visibility.Visible;
+                warningBox.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString(colorWarning));
             }
             else if (check.Count > 1)
             {
                 MessageBox.Show("There are multiple entries in the db");
+                warningBox.Visibility = Visibility.Visible;
+                warningBox.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString(colorError));
             }
             else
             {
                 MessageBox.Show("Welcome");
+                warningBox.Visibility = Visibility.Visible;
+                warningBox.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString(colorOK));
+                this.Hide();
+                Window1 win1 = new Window1();
+                win1.Show();
             }
+            //this.Hide();
+            //Window1 win1 = new Window1();
+            //win1.Show();
         }
 
 

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:School_Automation_Collab"
         mc:Ignorable="d"
-        Title="Window1" Height="450" Width="800">
+        Title="MainWindow" Height="680" Width="1000" WindowStyle="SingleBorderWindow" MaxHeight="680" MaxWidth="1000" MinHeight="680" MinWidth="1000" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize">
     <Grid>
         
     </Grid>
