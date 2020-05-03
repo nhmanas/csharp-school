@@ -29,8 +29,9 @@ namespace School_Automation_Collab
     {
 
         
-
-        public int isClickedUp = 0, isClickedIn = 1, wasClickedIn = 1, wasClickedUp = 0;
+        //how do i know i am in the register or login please comment
+        //you don't have to know... login check credentials, signup write them to database THE SAME INFO
+        private int isClickedUp = 0, isClickedIn = 1, wasClickedIn = 1, wasClickedUp = 0;
         public string colorMain = "#FF1976D3", colorInactive = "#FF569DE5", colorHover = "#FF9FBFE0", colorActive = "#FFFFFFFF", colorError = "#FF5D0052", colorWarning = "#FFFFBE00", colorOK = "#FF61B600";
 
         public MainWindow()
@@ -139,18 +140,31 @@ namespace School_Automation_Collab
                 return;
             }
             //MessageBox.Show("Waiting for db Bedirhan hurry");
-            School_Automation_Collab.sql.Database connection = new School_Automation_Collab.sql.Database();
+            sql.Database connection = new sql.Database();
+            List<sql.cmdParameterType> lstParams = new List<sql.cmdParameterType> {
+                new sql.cmdParameterType("@userid", idBox.Text.Trim().ToLower()),
+                new sql.cmdParameterType("@pass", pwBox.Password) };
+
+            var query = "select userid, pass from access where userid=@userid and pass=@pass";
 
 
 
-            var check = connection.select("access", "userid,pass", $"userid='{idBox.Text}' and pass='{pwBox.Password}'");
-            if (check.Count == 0)
+            //sorry i think i broke it
+            //var check = connection.select("access", "userid,pass", $"userid='{idBox.Text}' and pass='{pwBox.Password}'");
+            //if (check.Count == 0)
+
+            var check=connection.query(query,lstParams);
+            if (check == null)
+            {
+                MessageBox.Show("Connection to db failed");
+            }
+            else if (check.Rows.Count == 0)
             {
                 MessageBox.Show("Incorrect username or password");
                 warningBox.Visibility = Visibility.Visible;
                 warningBox.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString(colorWarning));
             }
-            else if (check.Count > 1)
+            else if (check.Rows.Count > 1)
             {
                 MessageBox.Show("There are multiple entries in the db");
                 warningBox.Visibility = Visibility.Visible;
