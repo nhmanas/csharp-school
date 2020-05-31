@@ -139,13 +139,20 @@ namespace School_Automation_Collab
                 MessageBox.Show("Fill Password!");
                 return;
             }
+            int n;
+            bool isNumeric = int.TryParse(idBox.Text.Trim(), out n);
+            if (!isNumeric)
+            {
+                MessageBox.Show("Enter numberic value");
+                return;
+            }
             //MessageBox.Show("Waiting for db Bedirhan hurry");
             sql.Database connection = new sql.Database();
             List<sql.cmdParameterType> lstParams = new List<sql.cmdParameterType> {
-                new sql.cmdParameterType("@userid", idBox.Text.Trim().ToLower()),
+                new sql.cmdParameterType("@user_id", n),
                 new sql.cmdParameterType("@pass", pwBox.Password) };
 
-            var query = "select userid, pass from access where userid=@userid and pass=@pass";
+            var query = "select * from access where user_id=@user_id and pass=@pass";
 
 
 
@@ -157,34 +164,46 @@ namespace School_Automation_Collab
             if (check == null)
             {
                 MessageBox.Show("Connection to db failed");
+                return;
             }
             else if (check.Rows.Count == 0)
             {
                 MessageBox.Show("Incorrect username or password");
-                warningBox.Visibility = Visibility.Visible;
-                warningBox.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString(colorWarning));
+                //warningBox.Visibility = Visibility.Visible;
+                //warningBox.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString(colorWarning));
+                return;
             }
             else if (check.Rows.Count > 1)
             {
                 MessageBox.Show("There are multiple entries in the db");
-                warningBox.Visibility = Visibility.Visible;
-                warningBox.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString(colorError));
+                //warningBox.Visibility = Visibility.Visible;
+                //warningBox.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString(colorError));
+                return;
             }
             else
             {
                 MessageBox.Show("Welcome");
-                warningBox.Visibility = Visibility.Visible;
-                warningBox.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString(colorOK));
-                this.Hide();
+                //warningBox.Visibility = Visibility.Visible;
+                //warningBox.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString(colorOK));
                 Window1 win1 = new Window1();
                 win1.Show();
+                this.Hide();
+                
             }
             //this.Hide();
             //Window1 win1 = new Window1();
             //win1.Show();
         }
 
+        private void isNumber(string input)
+        {
+            int n;
+            bool isNumeric = int.TryParse(input, out n);
+        }
+
 
     }
+
+    
     //signup END
 }
