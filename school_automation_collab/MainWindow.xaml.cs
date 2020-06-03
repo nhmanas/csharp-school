@@ -27,10 +27,6 @@ namespace School_Automation_Collab
     /// </summary>
     public partial class MainWindow : Window
     {
-
-        
-        //how do i know i am in the register or login please comment
-        //you don't have to know... login check credentials, signup write them to database THE SAME INFO
         private int isClickedUp = 0, isClickedIn = 1, wasClickedIn = 1, wasClickedUp = 0;
         public string colorMain = "#FF1976D3", colorInactive = "#FF569DE5", colorHover = "#FF9FBFE0", colorActive = "#FFFFFFFF", colorError = "#FF5D0052", colorWarning = "#FFFFBE00", colorOK = "#FF61B600";
 
@@ -158,23 +154,27 @@ namespace School_Automation_Collab
 
         private void loginButton_Click(object sender, RoutedEventArgs e)
         {
-            // May create another window for alerts, messagebox is ugly
-
-            if (idBox.Text == "")
+            if (idBox.Text == "" || pwBox.Password == "")
             {
-                MessageBox.Show("Fill ID Number!");
+                warningBox.Visibility = Visibility.Visible;
+                warningBox.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString(colorWarning));
+                warningLabel.Visibility = Visibility.Visible;
+                warningLabel.Content = "Please fill the required fields";
                 return;
             }
-            if (pwBox.Password == "")
-            {
-                MessageBox.Show("Fill Password!");
-                return;
-            }
+            //if (pwBox.Password == "")
+            //{
+            //    MessageBox.Show("Fill Password!");
+            //    return;
+            //}
             int n;
             bool isNumeric = int.TryParse(idBox.Text.Trim(), out n);
             if (!isNumeric)
             {
-                MessageBox.Show("Enter numberic value");
+                warningBox.Visibility = Visibility.Visible;
+                warningBox.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString(colorWarning));
+                warningLabel.Visibility = Visibility.Visible;
+                warningLabel.Content = "ID field must be numeric";
                 return;
             }
             //MessageBox.Show("Waiting for db Bedirhan hurry");
@@ -194,17 +194,19 @@ namespace School_Automation_Collab
             var check=connection.query(query,lstParams);
             if (check == null)
             {
-                MessageBox.Show("Connection to db failed");
+                //MessageBox.Show("Connection to db failed");
+                warningBox.Visibility = Visibility.Visible;
+                warningBox.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString(colorError));
+                warningLabel.Visibility = Visibility.Visible;
+                warningLabel.Content = "Check your connection";
                 return;
             }
             else if (check.Rows.Count == 0)
             {
-<<<<<<< HEAD
                 warningBox.Visibility = Visibility.Visible;
                 warningBox.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString(colorWarning));
                 warningLabel.Visibility = Visibility.Visible;
                 warningLabel.Content = "Incorrect username or password";
-                MessageBox.Show("Incorrect username or password");
             }
             else if (check.Rows.Count > 1)
             {
@@ -212,7 +214,6 @@ namespace School_Automation_Collab
                 warningBox.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString(colorError));
                 warningLabel.Visibility = Visibility.Visible;
                 warningLabel.Content = "There are multiple entries in the db";
-                MessageBox.Show("There are multiple entries in the db");
             }
             else
             {
@@ -222,25 +223,6 @@ namespace School_Automation_Collab
                 warningLabel.Content = "Logging in...";
                 MessageBox.Show("Welcome");
                 this.Hide();
-=======
-                MessageBox.Show("Incorrect username or password");
-                //warningBox.Visibility = Visibility.Visible;
-                //warningBox.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString(colorWarning));
-                return;
-            }
-            else if (check.Rows.Count > 1)
-            {
-                MessageBox.Show("There are multiple entries in the db");
-                //warningBox.Visibility = Visibility.Visible;
-                //warningBox.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString(colorError));
-                return;
-            }
-            else
-            {
-                MessageBox.Show("Welcome");
-                //warningBox.Visibility = Visibility.Visible;
-                //warningBox.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString(colorOK));
->>>>>>> e0ee43d13f033e0c5e3325e909d8d488ce513061
                 Window1 win1 = new Window1();
                 win1.Show();
                 this.Hide();
