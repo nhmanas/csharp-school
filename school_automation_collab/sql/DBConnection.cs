@@ -43,8 +43,13 @@ namespace School_Automation_Collab.sql
             {
                 if (String.IsNullOrEmpty(databaseName))
                     return false;
-                string connstring = string.Format("Server=localhost; database='{0}'; UID='root'; password=''", databaseName);
-                connection = new MySqlConnection(connstring);
+                MySqlConnectionStringBuilder conn_string = new MySqlConnectionStringBuilder();
+                conn_string.Server = "localhost";
+                conn_string.UserID = "root";
+                conn_string.Password = "";
+                conn_string.Database = databaseName;
+                //string connstring = string.Format("Server=localhost; database='{0}'; UID='root'; password=''", databaseName);
+                connection = new MySqlConnection(conn_string.ToString());
                 
                 
             }
