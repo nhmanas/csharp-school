@@ -38,6 +38,7 @@ namespace School_Automation_Collab
         {
             InitializeComponent();
             warningBox.Visibility = Visibility.Hidden;
+            warningLabel.Visibility = Visibility.Hidden;
         }
 
         //signin START
@@ -81,6 +82,20 @@ namespace School_Automation_Collab
                 wasClickedIn = 1;
                 isClickedIn = 1;
             }
+            signupIdBox.Visibility = Visibility.Hidden;
+            idLabel_signup.Visibility = Visibility.Hidden;
+            signupLabel_name.Visibility = Visibility.Hidden;
+            signupBox_name.Visibility = Visibility.Hidden;
+            pwBox_signup.Visibility = Visibility.Hidden;
+            pwLabel_signup.Visibility = Visibility.Hidden;
+            authLevelCombo_signup.Visibility = Visibility.Hidden;
+            authLevelLabel_signup.Visibility = Visibility.Hidden;
+
+
+            idLabel_signin.Visibility = Visibility.Visible;
+            idBox.Visibility = Visibility.Visible;
+            pwBox.Visibility = Visibility.Visible;
+            pwLabel_signin.Visibility = Visibility.Visible;
         }
 
         //signin END
@@ -123,6 +138,22 @@ namespace School_Automation_Collab
                 wasClickedUp = 1;
                 isClickedUp = 1;
             }
+            signupIdBox.Visibility = Visibility.Visible;
+            idLabel_signup.Visibility = Visibility.Visible;
+            signupLabel_name.Visibility = Visibility.Visible;
+            signupBox_name.Visibility = Visibility.Visible;
+            pwBox_signup.Visibility = Visibility.Visible;
+            pwLabel_signup.Visibility = Visibility.Visible;
+            authLevelCombo_signup.Visibility = Visibility.Visible;
+            authLevelLabel_signup.Visibility = Visibility.Visible;
+
+
+            idLabel_signin.Visibility = Visibility.Hidden;
+            idBox.Visibility = Visibility.Hidden;
+            pwBox.Visibility = Visibility.Hidden;
+            pwLabel_signin.Visibility = Visibility.Hidden;
+
+
         }
 
         private void loginButton_Click(object sender, RoutedEventArgs e)
@@ -160,21 +191,27 @@ namespace School_Automation_Collab
             }
             else if (check.Rows.Count == 0)
             {
-                MessageBox.Show("Incorrect username or password");
                 warningBox.Visibility = Visibility.Visible;
                 warningBox.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString(colorWarning));
+                warningLabel.Visibility = Visibility.Visible;
+                warningLabel.Content = "Incorrect username or password";
+                MessageBox.Show("Incorrect username or password");
             }
             else if (check.Rows.Count > 1)
             {
-                MessageBox.Show("There are multiple entries in the db");
                 warningBox.Visibility = Visibility.Visible;
                 warningBox.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString(colorError));
+                warningLabel.Visibility = Visibility.Visible;
+                warningLabel.Content = "There are multiple entries in the db";
+                MessageBox.Show("There are multiple entries in the db");
             }
             else
             {
-                MessageBox.Show("Welcome");
                 warningBox.Visibility = Visibility.Visible;
                 warningBox.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString(colorOK));
+                warningLabel.Visibility = Visibility.Visible;
+                warningLabel.Content = "Logging in...";
+                MessageBox.Show("Welcome");
                 this.Hide();
                 Window1 win1 = new Window1();
                 win1.Show();
