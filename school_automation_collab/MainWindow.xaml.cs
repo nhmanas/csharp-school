@@ -30,6 +30,8 @@ namespace School_Automation_Collab
         private int isClickedUp = 0, isClickedIn = 1, wasClickedIn = 1, wasClickedUp = 0;
         public string colorMain = "#FF1976D3", colorInactive = "#FF569DE5", colorHover = "#FF9FBFE0", colorActive = "#FFFFFFFF", colorError = "#FF5D0052", colorWarning = "#FFFFBE00", colorOK = "#FF61B600";
 
+        
+
         public MainWindow()
         {
             InitializeComponent();
@@ -92,6 +94,8 @@ namespace School_Automation_Collab
             idBox.Visibility = Visibility.Visible;
             pwBox.Visibility = Visibility.Visible;
             pwLabel_signin.Visibility = Visibility.Visible;
+
+            warningBox.Visibility = Visibility.Hidden;
         }
 
         //signin END
@@ -149,32 +153,61 @@ namespace School_Automation_Collab
             pwBox.Visibility = Visibility.Hidden;
             pwLabel_signin.Visibility = Visibility.Hidden;
 
-
+            warningBox.Visibility = Visibility.Hidden;
         }
-
-        private void loginButton_Click(object sender, RoutedEventArgs e)
+        private void errorType(string type)
         {
-            if (idBox.Text == "" || pwBox.Password == "")
-            {
+            if (type == "Warning_Fill")
+            { 
                 warningBox.Visibility = Visibility.Visible;
                 warningBox.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString(colorWarning));
                 warningLabel.Visibility = Visibility.Visible;
                 warningLabel.Content = "Please fill the required fields";
-                return;
             }
-            //if (pwBox.Password == "")
-            //{
-            //    MessageBox.Show("Fill Password!");
-            //    return;
-            //}
-            int n;
-            bool isNumeric = int.TryParse(idBox.Text.Trim(), out n);
-            if (!isNumeric)
+            else if( type == "Warning_Numeric")
             {
                 warningBox.Visibility = Visibility.Visible;
                 warningBox.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString(colorWarning));
                 warningLabel.Visibility = Visibility.Visible;
                 warningLabel.Content = "ID field must be numeric";
+            }
+            else if (type=="Connection")
+            {
+                warningBox.Visibility = Visibility.Visible;
+                warningBox.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString(colorError));
+                warningLabel.Visibility = Visibility.Visible;
+                warningLabel.Content = "Check your connection";
+            }
+            else if (type=="Incorrect_Input")
+            {
+                warningBox.Visibility = Visibility.Visible;
+                warningBox.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString(colorWarning));
+                warningLabel.Visibility = Visibility.Visible;
+                warningLabel.Content = "Incorrect username or password";
+            }
+            else if (type=="Multiple_Entries")
+            {
+                warningBox.Visibility = Visibility.Visible;
+                warningBox.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString(colorError));
+                warningLabel.Visibility = Visibility.Visible;
+                warningLabel.Content = "There are multiple entries in the db";
+            }
+
+        }
+
+        private void loginButton_Click(object sender, RoutedEventArgs e)
+        {
+            
+            if (idBox.Text == "" || pwBox.Password == "")
+            {
+                errorType("Warning");
+                return;
+            }
+            int n;
+            bool isNumeric = int.TryParse(idBox.Text.Trim(), out n);
+            if (!isNumeric)
+            {
+                errorType("Warning_Numeric");
                 return;
             }
             //MessageBox.Show("Waiting for db Bedirhan hurry");
@@ -194,26 +227,16 @@ namespace School_Automation_Collab
             var check=connection.query(query,lstParams);
             if (check == null)
             {
-                //MessageBox.Show("Connection to db failed");
-                warningBox.Visibility = Visibility.Visible;
-                warningBox.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString(colorError));
-                warningLabel.Visibility = Visibility.Visible;
-                warningLabel.Content = "Check your connection";
+                errorType("Connection");
                 return;
             }
             else if (check.Rows.Count == 0)
             {
-                warningBox.Visibility = Visibility.Visible;
-                warningBox.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString(colorWarning));
-                warningLabel.Visibility = Visibility.Visible;
-                warningLabel.Content = "Incorrect username or password";
+                errorType("Incorrect_Input");
             }
             else if (check.Rows.Count > 1)
             {
-                warningBox.Visibility = Visibility.Visible;
-                warningBox.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString(colorError));
-                warningLabel.Visibility = Visibility.Visible;
-                warningLabel.Content = "There are multiple entries in the db";
+                errorType("Multiple_Entries");
             }
             else
             {
@@ -222,7 +245,6 @@ namespace School_Automation_Collab
                 warningLabel.Visibility = Visibility.Visible;
                 warningLabel.Content = "Logging in...";
                 MessageBox.Show("Welcome");
-                this.Hide();
                 Window1 win1 = new Window1();
                 win1.Show();
                 this.Hide();
@@ -232,11 +254,21 @@ namespace School_Automation_Collab
             //Window1 win1 = new Window1();
             //win1.Show();
         }
-
-        private void isNumber(string input)
+        private void signupButton_Click(object sender, RoutedEventArgs e)
         {
+            if (signupIdBox.Text == "" || pwBox_signup.Password == "")
+            {
+                errorType("Warning");
+                return;
+            }
             int n;
-            bool isNumeric = int.TryParse(input, out n);
+            bool isNumeric = int.TryParse(signupIdBox.Text.Trim(), out n);
+            if (!isNumeric)
+            {
+                errorType("Warning_Numeric");
+                return;
+            }
+
         }
 
 
