@@ -15,7 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-using static School_Automation_Collab.sql.Database;
+using School_Automation_Collab.sql;
 
 using System.Windows.Media.Animation;
 
@@ -67,6 +67,7 @@ namespace School_Automation_Collab
 
         private void signinTab_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
+            a = e;
             signinTab.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString(colorActive));
             loginButton.Visibility = Visibility.Visible;
             rememberCheck.Visibility = Visibility.Visible;
@@ -124,9 +125,10 @@ namespace School_Automation_Collab
                 signupTab.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString(colorActive));
             }
         }
-
+        private MouseButtonEventArgs a;
         private void signupTab_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
+            a = e;
             signupTab.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString(colorActive));
             loginButton.Visibility = Visibility.Hidden;
             rememberCheck.Visibility = Visibility.Hidden;
@@ -157,99 +159,58 @@ namespace School_Automation_Collab
             warningBox.Visibility = Visibility.Hidden;
             warningLabel.Visibility = Visibility.Hidden;
         }
-        private void errorType(string type)
+        private void messageHandle(string color, string message)
         {
-            if (type == "Warning_Fill")
-            { 
-                warningBox.Visibility = Visibility.Visible;
-                warningBox.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString(colorWarning));
-                warningLabel.Visibility = Visibility.Visible;
-                warningLabel.Content = "Please fill the required fields";
-            }
-            else if( type == "Warning_Numeric")
-            {
-                warningBox.Visibility = Visibility.Visible;
-                warningBox.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString(colorWarning));
-                warningLabel.Visibility = Visibility.Visible;
-                warningLabel.Content = "ID field must be numeric";
-            }
-            else if (type=="Connection")
-            {
-                warningBox.Visibility = Visibility.Visible;
-                warningBox.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString(colorError));
-                warningLabel.Visibility = Visibility.Visible;
-                warningLabel.Content = "Check your connection";
-            }
-            else if (type=="Incorrect_Input")
-            {
-                warningBox.Visibility = Visibility.Visible;
-                warningBox.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString(colorWarning));
-                warningLabel.Visibility = Visibility.Visible;
-                warningLabel.Content = "Incorrect username or password";
-            }
-            else if (type=="Multiple_Entries")
-            {
-                warningBox.Visibility = Visibility.Visible;
-                warningBox.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString(colorError));
-                warningLabel.Visibility = Visibility.Visible;
-                warningLabel.Content = "There are multiple entries in the db";
-            }
-
+            warningBox.Visibility = Visibility.Visible;
+            warningBox.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString(color));
+            warningLabel.Visibility = Visibility.Visible;
+            warningLabel.Content = message;
         }
 
         private void loginButton_Click(object sender, RoutedEventArgs e)
         {
             
-            if (idBox.Text == "" || pwBox.Password == "")
+            if (idBox.Text.Trim() == "" || pwBox.Password == "")
             {
-                errorType("Warning_Fill");
+                messageHandle(colorWarning, "Please fill the required fields");
                 return;
             }
             int n;
             bool isNumeric = int.TryParse(idBox.Text.Trim(), out n);
             if (!isNumeric)
             {
-                errorType("Warning_Numeric");
+                messageHandle(colorWarning, "ID field must be numeric");
                 return;
             }
             //MessageBox.Show("Waiting for db Bedirhan hurry");
-            sql.Database connection = new sql.Database();
-            List<sql.cmdParameterType> lstParams = new List<sql.cmdParameterType> {
-                new sql.cmdParameterType("@user_id", n),
-                new sql.cmdParameterType("@pass", pwBox.Password) };
+            Database connection = new Database();
+            List<cmdParameterType> lstParams = new List<cmdParameterType> {
+                new cmdParameterType("@user_id", idBox.Text.Trim()),
+                new cmdParameterType("@pass", pwBox.Password) };
 
             var query = "select * from access where user_id=@user_id and pass=@pass";
-
-
-
-            //sorry i think i broke it
-            //var check = connection.select("access", "userid,pass", $"userid='{idBox.Text}' and pass='{pwBox.Password}'");
-            //if (check.Count == 0)
 
             var check=connection.query(query,lstParams);
             if (check == null)
             {
-                errorType("Connection");
+                messageHandle(colorError, "Check your connection");
                 return;
             }
             else if (check.Rows.Count == 0)
             {
-                errorType("Incorrect_Input");
+                messageHandle(colorWarning, "Incorrect username or password");
             }
             else if (check.Rows.Count > 1)
             {
-                errorType("Multiple_Entries");
+                messageHandle(colorError, "There are multiple entries in the db");
             }
             else
             {
-                warningBox.Visibility = Visibility.Visible;
-                warningBox.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString(colorOK));
-                warningLabel.Visibility = Visibility.Visible;
-                warningLabel.Content = "Logging in...";
+                messageHandle(colorOK, "Logging in...");
                 MessageBox.Show("Welcome");
                 Window1 win1 = new Window1();
                 win1.Show();
-                this.Hide();
+                this.Close();
                 
             }
             //this.Hide();
@@ -258,22 +219,62 @@ namespace School_Automation_Collab
         }
         private void signupButton_Click(object sender, RoutedEventArgs e)
         {
-            if (signupIdBox.Text == "" || pwBox_signup.Password == "")
+            if (signupIdBox.Text.Trim() == "" || pwBox_signup.Password == "" || signupBox_name.Text.Trim()=="")
             {
-                errorType("Warning_Fill");
+                messageHandle(colorWarning, "Please fill the required fields");
                 return;
             }
             int n;
             bool isNumeric = int.TryParse(signupIdBox.Text.Trim(), out n);
             if (!isNumeric)
             {
-                errorType("Warning_Numeric");
+                messageHandle(colorWarning, "ID field must be numeric");
                 return;
             }
 
+            var connection = new Database();
+            List<cmdParameterType> lstParams = new List<cmdParameterType> {
+                new cmdParameterType("@user_id", n) };
+
+            var query = "select * from access where user_id=@user_id";
+
+            var check=connection.query(query, lstParams);
+
+            if (check == null)
+            {
+                messageHandle(colorError, "Check your connection");
+                return;
+            }
+            else if(check.Rows.Count==1)
+            {
+                messageHandle(colorWarning, "There is a user with same user id");
+                return;
+            }
+            else if (check.Rows.Count > 1)
+            {
+                messageHandle(colorError, "There are multiple entries in the db");
+                return;
+            }
+            int type = 2 - authLevelCombo_signup.SelectedIndex;
+
+
+            query = $"INSERT INTO `access`(`name`, `user_id`, `pass`, `type`) VALUES (@name,@user_id,@pass,{type})";
+            lstParams = new List<cmdParameterType>
+            {
+                new cmdParameterType("@name",signupBox_name.Text.Trim()),
+                new cmdParameterType("@user_id",n),
+                new cmdParameterType("@pass",pwBox_signup.Password)
+            };
+            check = connection.query(query, lstParams);
+            if (check == null)
+            {
+                messageHandle(colorError, "Check your connection");
+                return;
+            }
+            MessageBox.Show("Signup complete please login");
+
+            signinTab_MouseLeftButtonUp(new object(), a);
         }
-
-
     }
 
     

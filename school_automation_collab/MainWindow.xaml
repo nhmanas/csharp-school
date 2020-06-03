@@ -9,7 +9,7 @@
     <Grid>
 
         <Rectangle Fill="#FF1976D3" HorizontalAlignment="Left" Height="658" Margin="504,0,0,-9" Stroke="Black" VerticalAlignment="Top" Width="488" Grid.IsSharedSizeScope="True"/>
-        <Button x:Name="signupButton" Content="Sign Up" HorizontalAlignment="Left" Margin="827,427,0,0" VerticalAlignment="Top" Width="116" Background="#FF1976D3" FontSize="16" BorderBrush="White" Foreground="White" Height="29"/>
+        <Button x:Name="signupButton" Content="Sign Up" HorizontalAlignment="Left" Margin="827,427,0,0" VerticalAlignment="Top" Width="116" Background="#FF1976D3" FontSize="16" BorderBrush="White" Foreground="White" Height="29" Click="signupButton_Click"/>
 
         <TextBlock x:Name="signinTab" HorizontalAlignment="Left" Margin="554,128,0,0" TextWrapping="Wrap" Text="Sign in" VerticalAlignment="Top" FontSize="48" TextDecorations="{x:Null}" Foreground="#FFFFFFFF" MouseLeftButtonUp="signinTab_MouseLeftButtonUp" Cursor="Hand" MouseEnter="signinTab_MouseEnter" MouseLeave="signinTab_MouseLeave"/>
         <TextBlock x:Name="signupTab" HorizontalAlignment="Left" Margin="782,128,0,0" TextWrapping="Wrap" Text="Sign up" VerticalAlignment="Top" FontSize="48" TextDecorations="{x:Null}" Foreground="#FF569DE5" MouseLeftButtonUp="signupTab_MouseLeftButtonUp" MouseEnter="signupTab_MouseEnter" MouseLeave="signupTab_MouseLeave" Cursor="Hand">
