@@ -96,6 +96,7 @@ namespace School_Automation_Collab
             pwLabel_signin.Visibility = Visibility.Visible;
 
             warningBox.Visibility = Visibility.Hidden;
+            warningLabel.Visibility = Visibility.Hidden;
         }
 
         //signin END
@@ -154,6 +155,7 @@ namespace School_Automation_Collab
             pwLabel_signin.Visibility = Visibility.Hidden;
 
             warningBox.Visibility = Visibility.Hidden;
+            warningLabel.Visibility = Visibility.Hidden;
         }
         private void errorType(string type)
         {
@@ -200,7 +202,7 @@ namespace School_Automation_Collab
             
             if (idBox.Text == "" || pwBox.Password == "")
             {
-                errorType("Warning");
+                errorType("Warning_Fill");
                 return;
             }
             int n;
@@ -258,7 +260,7 @@ namespace School_Automation_Collab
         {
             if (signupIdBox.Text == "" || pwBox_signup.Password == "")
             {
-                errorType("Warning");
+                errorType("Warning_Fill");
                 return;
             }
             int n;

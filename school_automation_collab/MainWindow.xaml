@@ -39,7 +39,7 @@
         <PasswordBox x:Name="pwBox_signup" HorizontalAlignment="Left" Margin="554,378,0,0" VerticalAlignment="Top" Width="204" Height="29" FontSize="18" Background="#FF1976D3" BorderBrush="White" Foreground="White" BorderThickness="5,1,1,1" Visibility="Hidden" TabIndex="5"/>
         <TextBlock x:Name="authLevelLabel_signup" HorizontalAlignment="Left" Margin="772,351,0,0" TextWrapping="Wrap" Text="Who are you?" VerticalAlignment="Top" FontSize="16" TextDecorations="{x:Null}" Foreground="#FFFFFFFF" Visibility="Hidden"/>
         <ComboBox x:Name="authLevelCombo_signup" HorizontalAlignment="Left" Margin="772,378,0,0" VerticalAlignment="Top" Width="171" Height="29" Visibility="Hidden" TabIndex="6">
-            <ComboBoxItem Content="Student"/>
+            <ComboBoxItem Content="Student" IsSelected="True"/>
             <ComboBoxItem Content="Teacher"/>
         </ComboBox>
 
