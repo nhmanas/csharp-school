@@ -52,6 +52,13 @@ namespace School_Automation_Collab
                 }
             }
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Window1 win1 = new Window1();
+            win1.Show();
+        }
+
         private void signinTab_MouseLeave(object sender, MouseEventArgs e)
         {
             if (wasClickedIn == 0)

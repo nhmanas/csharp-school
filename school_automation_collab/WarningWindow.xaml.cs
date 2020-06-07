@@ -15,24 +15,18 @@ using System.Windows.Shapes;
 namespace School_Automation_Collab
 {
     /// <summary>
-    /// Interaction logic for Window1.xaml
+    /// Interaction logic for WarningWindow.xaml
     /// </summary>
-    public partial class Window1 : Window
+    public partial class WarningWindow : Window
     {
-        public Window1()
+        public WarningWindow()
         {
             InitializeComponent();
         }
 
-        private void loginButton_Click(object sender, RoutedEventArgs e)
-        {
-            WarningWindow ww = new WarningWindow();
-            ww.Show();
-        }
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
+            this.Close();
         }
     }
 }
