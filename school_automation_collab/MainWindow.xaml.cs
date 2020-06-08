@@ -28,12 +28,13 @@ namespace School_Automation_Collab
     public partial class MainWindow : Window
     {
         private int isClickedUp = 0, isClickedIn = 1, wasClickedIn = 1, wasClickedUp = 0;
-        public string colorMain = "#FF1976D3", colorInactive = "#FF569DE5", colorHover = "#FF9FBFE0", colorActive = "#FFFFFFFF", colorError = "#FF5D0052", colorWarning = "#FFFFBE00", colorOK = "#FF61B600";
+        public static string colorMain = "#FF1976D3", colorInactive = "#FF569DE5", colorHover = "#FF9FBFE0", colorActive = "#FFFFFFFF", colorError = "#FF5D0052", colorWarning = "#FFFFBE00", colorOK = "#FF61B600";
 
         
 
         public MainWindow()
         {
+            
             InitializeComponent();
             warningBox.Visibility = Visibility.Hidden;
             warningLabel.Visibility = Visibility.Hidden;
@@ -55,7 +56,7 @@ namespace School_Automation_Collab
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Window1 win1 = new Window1();
+            Student win1 = new Student();
             win1.Show();
         }
 
@@ -214,9 +215,8 @@ namespace School_Automation_Collab
             else
             {
                 messageHandle(colorOK, "Logging in...");
-                MessageBox.Show("Welcome");
-                Window1 win1 = new Window1();
-                win1.Show();
+                WarningWindow ww = new WarningWindow(colorOK, "OK", "Log in successfull",new Student());
+                ww.Show();
                 this.Close();
                 
             }

@@ -17,17 +17,23 @@ namespace School_Automation_Collab
     /// <summary>
     /// Interaction logic for Window1.xaml
     /// </summary>
-    public partial class Window1 : Window
+    public partial class Student : Window
     {
-        public Window1()
+        
+        public Student()
         {
+            
+
             InitializeComponent();
         }
 
         private void loginButton_Click(object sender, RoutedEventArgs e)
         {
-            WarningWindow ww = new WarningWindow();
+            WarningWindow ww = new WarningWindow(MainWindow.colorOK,"OK","Log out successfull");
             ww.Show();
+            MainWindow main = new MainWindow();
+            main.Show();
+            this.Close();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

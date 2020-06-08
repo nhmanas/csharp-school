@@ -7,10 +7,13 @@
         mc:Ignorable="d"
         Title="Warning" Height="196.054" Width="377.714" ResizeMode="NoResize" ShowInTaskbar="False" Topmost="True" WindowStartupLocation="CenterScreen" FontSize="16">
     <Grid>
-        <TextBlock x:Name="wwContent" HorizontalAlignment="Left" Height="71" Margin="10,43,0,0" TextWrapping="Wrap" Text="Warning content" VerticalAlignment="Top" Width="342"/>
-        <Rectangle Fill="#FF5D0052" HorizontalAlignment="Left" Height="38" Stroke="Black" VerticalAlignment="Top" Width="362" Grid.IsSharedSizeScope="True" StrokeThickness="0"/>
-        <Label x:Name="wwHeader" Content="Warning Header" HorizontalAlignment="Left" Margin="10,2,0,0" VerticalAlignment="Top" Foreground="White"/>
-        <Button x:Name="wwClose" Content="OK" HorizontalAlignment="Left" Margin="274,117,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+        
+        <Rectangle Name="header_color" Fill="#FF5D0052" HorizontalAlignment="Left" Height="38" Stroke="Black" VerticalAlignment="Top" Width="372" Grid.IsSharedSizeScope="True" StrokeThickness="0"/>
+        <Label Name="wwContent" HorizontalAlignment="Left" Height="71" Margin="10,43,0,0" Content="Warning content" VerticalAlignment="Top" Width="342" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+
+        <Label Name="wwHeader" Content="Warning Header" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" Width="372" Height="38" HorizontalContentAlignment="Center"/>
+        <Button Name="wwClose" Content="OK" HorizontalAlignment="Left" Margin="274,117,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+
 
     </Grid>
 </Window>

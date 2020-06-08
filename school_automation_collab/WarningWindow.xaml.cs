@@ -19,14 +19,34 @@ namespace School_Automation_Collab
     /// </summary>
     public partial class WarningWindow : Window
     {
-        public WarningWindow()
+        Window a;
+        public WarningWindow(string headerBackground, string Title, string Content, Window a=null)
         {
+
             InitializeComponent();
+            header_color.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString(headerBackground));
+            wwHeader.Content = Title;
+            wwContent.Content = Content;
+            this.a = a;
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            if (a != null)
+            {
+                a.Show();
+            }
             this.Close();
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            if (a!=null)
+            {
+                a.Show();
+            }
+
         }
     }
 }
