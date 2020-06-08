@@ -24,7 +24,7 @@ namespace School_Automation_Collab
         {
 
             InitializeComponent();
-            header_color.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString(headerBackground));
+            wwHeader.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString(headerBackground));
             wwHeader.Content = Title;
             wwContent.Content = Content;
             this.a = a;

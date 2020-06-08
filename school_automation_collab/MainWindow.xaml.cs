@@ -190,7 +190,7 @@ namespace School_Automation_Collab
                 messageHandle(colorWarning, "ID field must be numeric");
                 return;
             }
-            //MessageBox.Show("Waiting for db Bedirhan hurry");
+            
             List<cmdParameterType> lstParams = new List<cmdParameterType> {
                 new cmdParameterType("@user_id", idBox.Text.Trim()),
                 new cmdParameterType("@pass", pwBox.Password) };
@@ -214,8 +214,7 @@ namespace School_Automation_Collab
             else
             {
                 messageHandle(colorOK, "Logging in...");
-                WarningWindow ww = new WarningWindow(colorOK, "OK", "Log in successfull",new Student());
-                ww.Show();
+                new WarningWindow(colorOK, "OK", "Log in successfull",new Student()).Show();
                 this.Close();
                 
             }
@@ -276,7 +275,8 @@ namespace School_Automation_Collab
                 messageHandle(colorError, "Check your connection");
                 return;
             }
-            MessageBox.Show("Signup complete please login");
+            
+            new WarningWindow(colorOK, "Success", "Signup Complete, Please Login").Show();
 
             signinTab_MouseLeftButtonUp(new object(), a);
         }
