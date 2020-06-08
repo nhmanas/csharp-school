@@ -191,14 +191,13 @@ namespace School_Automation_Collab
                 return;
             }
             //MessageBox.Show("Waiting for db Bedirhan hurry");
-            Database connection = new Database();
             List<cmdParameterType> lstParams = new List<cmdParameterType> {
                 new cmdParameterType("@user_id", idBox.Text.Trim()),
                 new cmdParameterType("@pass", pwBox.Password) };
 
             var query = "select * from access where user_id=@user_id and pass=@pass";
 
-            var check=connection.query(query,lstParams);
+            var check=Database.query(query,lstParams);
             if (check == null)
             {
                 messageHandle(colorError, "Check your connection");
@@ -239,13 +238,12 @@ namespace School_Automation_Collab
                 return;
             }
 
-            var connection = new Database();
             List<cmdParameterType> lstParams = new List<cmdParameterType> {
                 new cmdParameterType("@user_id", n) };
 
             var query = "select * from access where user_id=@user_id";
 
-            var check=connection.query(query, lstParams);
+            var check=Database.query(query, lstParams);
 
             if (check == null)
             {
@@ -272,7 +270,7 @@ namespace School_Automation_Collab
                 new cmdParameterType("@user_id",n),
                 new cmdParameterType("@pass",pwBox_signup.Password)
             };
-            check = connection.query(query, lstParams);
+            check = Database.query(query, lstParams);
             if (check == null)
             {
                 messageHandle(colorError, "Check your connection");

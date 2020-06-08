@@ -24,7 +24,7 @@ namespace School_Automation_Collab.sql
     }
     public class Database
     {
-        public DataTable query(string query, List<cmdParameterType> lstParameters)
+        public static DataTable query(string query, List<cmdParameterType> lstParameters)
         {            
             var dbCon =new DBConnection();
             dbCon.DatabaseName = "viovasof_cse";
