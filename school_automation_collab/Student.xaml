@@ -5,11 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:School_Automation_Collab"
         mc:Ignorable="d"
-        Title="ROLE: NAME" Height="680" Width="1000" WindowStyle="SingleBorderWindow" MaxHeight="680" MaxWidth="1000" MinHeight="680" MinWidth="1000" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" FontSize="16">
+        Title="Student: NAME" Height="680" Width="1000" WindowStyle="SingleBorderWindow" MaxHeight="680" MaxWidth="1000" MinHeight="680" MinWidth="1000" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" FontSize="16">
     <Grid Background="#FF1976D3" Margin="0,0,0,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="61*"/>
+            <ColumnDefinition Width="81*"/>
+        </Grid.ColumnDefinitions>
 
-        <Rectangle Fill="#FF1976D3" HorizontalAlignment="Left" Height="38" Stroke="Black" VerticalAlignment="Top" Width="993" Grid.IsSharedSizeScope="True" StrokeThickness="0"/>
-        <TabControl HorizontalAlignment="Left" Height="583" Margin="10,10,0,0" VerticalAlignment="Top" Width="962" FontSize="16">
+        <Rectangle Fill="#FF1976D3" HorizontalAlignment="Left" Height="38" Stroke="Black" VerticalAlignment="Top" Width="993" Grid.IsSharedSizeScope="True" StrokeThickness="0" Grid.ColumnSpan="2"/>
+        <TabControl HorizontalAlignment="Left" Height="583" Margin="10,10,0,0" VerticalAlignment="Top" Width="962" FontSize="16" Grid.ColumnSpan="2">
             <TabItem x:Name="tabHome" Header="Home">
                 <Grid Background="#FFFFFFFF">
                     <GroupBox Header="General information" HorizontalAlignment="Left" Height="245" Margin="10,10,0,0" VerticalAlignment="Top" Width="936">
@@ -26,7 +30,7 @@
                             <Label x:Name="departmentLabel" Content="VERY_LONG_DEPARTMENT_LABEL" HorizontalAlignment="Left" Margin="347,141,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.839,0.613"/>
                             <Label x:Name="yearLabel" Content="YEAR_LABEL" HorizontalAlignment="Left" Margin="347,172,0,0" VerticalAlignment="Top"/>
                             <Label Content="Faculty:" HorizontalAlignment="Left" Margin="262,110,0,0" VerticalAlignment="Top"/>
-                            <Label x:Name="gradeLabel_Copy" Content="VERY_LONG_FACULTY_LABEL" HorizontalAlignment="Left" Margin="347,110,0,0" VerticalAlignment="Top"/>
+                            <Label x:Name="facultyLabel" Content="VERY_LONG_FACULTY_LABEL" HorizontalAlignment="Left" Margin="347,110,0,0" VerticalAlignment="Top"/>
                             <Label Content="GPA:" HorizontalAlignment="Left" Margin="827,10,0,0" VerticalAlignment="Top"/>
                             <Label x:Name="gpaLabel" Content="4.00" HorizontalAlignment="Left" Margin="875,10,0,0" VerticalAlignment="Top" Foreground="#FF61B600"/>
                         </Grid>
@@ -75,7 +79,7 @@
                 </Grid>
             </TabItem>
         </TabControl>
-        <Button x:Name="testButton" Content="Test" HorizontalAlignment="Left" Margin="856,602,0,0" VerticalAlignment="Top" Width="116" Background="#FF1976D3" FontSize="16" BorderBrush="White" Foreground="White" Height="29" Click="loginButton_Click" TabIndex="2"/>
+        <Button x:Name="testButton" Content="Test" HorizontalAlignment="Left" Margin="429,602,0,0" VerticalAlignment="Top" Width="116" Background="#FF1976D3" FontSize="16" BorderBrush="White" Foreground="White" Height="29" Click="loginButton_Click" TabIndex="2" Grid.Column="1"/>
         <Button x:Name="logoutButton" Content="Logout" HorizontalAlignment="Left" Margin="10,602,0,0" VerticalAlignment="Top" Width="116" Background="#FF1976D3" FontSize="16" BorderBrush="White" Foreground="White" Height="29" Click="loginButton_Click" TabIndex="2"/>
 
     </Grid>

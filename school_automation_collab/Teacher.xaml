@@ -1,0 +1,44 @@
+﻿<Window x:Class="School_Automation_Collab.Teacher"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:School_Automation_Collab"
+        mc:Ignorable="d"
+        Title="Teacher: NAME" Height="680" Width="1000" WindowStyle="SingleBorderWindow" MaxHeight="680" MaxWidth="1000" MinHeight="680" MinWidth="1000" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" FontSize="16">
+    <Grid Background="#FF1976D3" Margin="0,0,0,0">
+
+        <Rectangle Fill="#FF1976D3" HorizontalAlignment="Left" Height="38" Stroke="Black" VerticalAlignment="Top" Width="993" Grid.IsSharedSizeScope="True" StrokeThickness="0"/>
+        <TabControl HorizontalAlignment="Left" Height="583" Margin="10,10,0,0" VerticalAlignment="Top" Width="962" FontSize="16">
+            <TabItem x:Name="tabHome" Header="Home">
+                <Grid Background="#FFFFFFFF">
+                    <GroupBox Header="General information" HorizontalAlignment="Left" Height="245" Margin="10,10,0,0" VerticalAlignment="Top" Width="936">
+                        <Grid Background="#FFFFFFFF">
+                            <Label Content="Name:" HorizontalAlignment="Left" Margin="278,41,0,0" VerticalAlignment="Top"/>
+                            <Image HorizontalAlignment="Left" Height="198" Margin="10,10,0,0" VerticalAlignment="Top" Width="196" Source="BlueHead.png"/>
+                            <Label Content="Surname:" HorizontalAlignment="Left" Margin="258,72,0,0" VerticalAlignment="Top"/>
+                            <Label Content="ID Number:" HorizontalAlignment="Left" Margin="243,103,0,0" VerticalAlignment="Top"/>
+                            <Label Content="Department:" HorizontalAlignment="Left" Margin="236,165,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.839,0.613"/>
+                            <Label x:Name="nameLabel" Content="NAME_LABEL" HorizontalAlignment="Left" Margin="357,41,0,0" VerticalAlignment="Top"/>
+                            <Label x:Name="surnameLabel" Content="SURNAME_LABEL" HorizontalAlignment="Left" Margin="357,72,0,0" VerticalAlignment="Top"/>
+                            <Label x:Name="idnumberLabel" Content="IDNUMBER_LABEL" HorizontalAlignment="Left" Margin="357,103,0,0" VerticalAlignment="Top"/>
+                            <Label x:Name="departmentLabel" Content="VERY_LONG_DEPARTMENT_LABEL" HorizontalAlignment="Left" Margin="357,165,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.839,0.613"/>
+                            <Label Content="Faculty:" HorizontalAlignment="Left" Margin="272,134,0,0" VerticalAlignment="Top"/>
+                            <Label x:Name="facultyLabel" Content="VERY_LONG_FACULTY_LABEL" HorizontalAlignment="Left" Margin="357,134,0,0" VerticalAlignment="Top"/>
+                            <Label Content="Title:" HorizontalAlignment="Left" Margin="290,10,0,0" VerticalAlignment="Top"/>
+                            <Label x:Name="titleLabel" Content="prof, doç, falan ya da admin gelecek" HorizontalAlignment="Left" Margin="357,10,0,0" VerticalAlignment="Top"/>
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="tabExam" Header="Grade students">
+                <Grid Background="#FFFFFFFF">
+                    <DataGrid HorizontalAlignment="Left" Height="530" Margin="10,10,0,0" VerticalAlignment="Top" Width="936"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <Button x:Name="testButton" Content="Test" HorizontalAlignment="Left" Margin="856,602,0,0" VerticalAlignment="Top" Width="116" Background="#FF1976D3" FontSize="16" BorderBrush="White" Foreground="White" Height="29" Click="loginButton_Click" TabIndex="2"/>
+        <Button x:Name="logoutButton" Content="Logout" HorizontalAlignment="Left" Margin="10,602,0,0" VerticalAlignment="Top" Width="116" Background="#FF1976D3" FontSize="16" BorderBrush="White" Foreground="White" Height="29" Click="loginButton_Click" TabIndex="2"/>
+
+    </Grid>
+</Window>
