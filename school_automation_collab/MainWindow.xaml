@@ -42,7 +42,10 @@
             <ComboBoxItem Content="Student" IsSelected="True"/>
             <ComboBoxItem Content="Teacher"/>
         </ComboBox>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="580,473,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+        <Button Content="Student" HorizontalAlignment="Left" Margin="554,482,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+        <Button Content="Student" HorizontalAlignment="Left" Margin="554,482,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+        <Button Content="Teacher" HorizontalAlignment="Left" Margin="634,482,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_1"/>
+        <Button Content="Admin" HorizontalAlignment="Left" Margin="714,482,0,0" VerticalAlignment="Top" Width="76" Click="Button_Click_2"/>
 
     </Grid>
 </Window>

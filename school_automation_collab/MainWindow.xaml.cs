@@ -60,6 +60,18 @@ namespace School_Automation_Collab
             win1.Show();
         }
 
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            Teacher win2 = new Teacher();
+            win2.Show();
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            Admin win3 = new Admin();
+            win3.Show();
+        }
+
         private void signinTab_MouseLeave(object sender, MouseEventArgs e)
         {
             if (wasClickedIn == 0)
