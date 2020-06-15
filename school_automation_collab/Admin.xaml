@@ -157,6 +157,33 @@
                     </GroupBox>
                 </Grid>
             </TabItem>
+            <TabItem Header="Approve teacher accounts">
+                <Grid Background="#FFFFFFFF">
+                    <GroupBox Header="Teacher information" HorizontalAlignment="Left" Height="267" Margin="10,42,0,0" VerticalAlignment="Top" Width="936">
+                        <Grid Background="#FFFFFFFF">
+                            <Label Content="Name:" HorizontalAlignment="Left" Margin="278,41,0,0" VerticalAlignment="Top"/>
+                            <Image HorizontalAlignment="Left" Height="198" Margin="10,10,0,0" VerticalAlignment="Top" Width="196" Source="BlueHead.png"/>
+                            <Label Content="Surname:" HorizontalAlignment="Left" Margin="258,72,0,0" VerticalAlignment="Top"/>
+                            <Label Content="ID Number:" HorizontalAlignment="Left" Margin="243,103,0,0" VerticalAlignment="Top"/>
+                            <Label Content="Department:" HorizontalAlignment="Left" Margin="236,165,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.839,0.613"/>
+                            <Label x:Name="nameLabel2" Content="NAME_LABEL" HorizontalAlignment="Left" Margin="357,41,0,0" VerticalAlignment="Top"/>
+                            <Label x:Name="surnameLabel2" Content="SURNAME_LABEL" HorizontalAlignment="Left" Margin="357,72,0,0" VerticalAlignment="Top"/>
+                            <Label x:Name="idnumberLabel2" Content="IDNUMBER_LABEL" HorizontalAlignment="Left" Margin="357,103,0,0" VerticalAlignment="Top"/>
+                            <Label x:Name="departmentLabel" Content="VERY_LONG_DEPARTMENT_LABEL" HorizontalAlignment="Left" Margin="357,165,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.839,0.613"/>
+                            <Label Content="Faculty:" HorizontalAlignment="Left" Margin="272,134,0,0" VerticalAlignment="Top"/>
+                            <Label x:Name="facultyLabel" Content="VERY_LONG_FACULTY_LABEL" HorizontalAlignment="Left" Margin="357,134,0,0" VerticalAlignment="Top"/>
+                            <Label Content="Title:" HorizontalAlignment="Left" Margin="290,10,0,0" VerticalAlignment="Top"/>
+                            <Label x:Name="titleLabel1" Content="prof, doç, falan ya da admin gelecek" HorizontalAlignment="Left" Margin="357,10,0,0" VerticalAlignment="Top"/>
+                            <Button x:Name="teacherokButton" Content="Approve account" Background="#FF1976D3" Foreground="White" HorizontalAlignment="Left" Margin="774,202,0,0" VerticalAlignment="Top" Width="140" Height="27"/>
+                            <Button x:Name="teacherokButton_Copy" Content="Deny request" Background="#FFE60000" Foreground="White" HorizontalAlignment="Left" Margin="629,202,0,0" VerticalAlignment="Top" Width="140" Height="27"/>
+                        </Grid>
+                    </GroupBox>
+                    <ComboBox HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="349" SelectedIndex="0">
+                        <ComboBoxItem Content="SELECT TEACHER NAME"/>
+                    </ComboBox>
+                    <Button Content="Select" HorizontalAlignment="Left" Margin="364,10,0,0" VerticalAlignment="Top" Width="75" Height="27"/>
+                </Grid>
+            </TabItem>
         </TabControl>
         <Button x:Name="testButton" Content="Test" HorizontalAlignment="Left" Margin="856,602,0,0" VerticalAlignment="Top" Width="116" Background="#FF1976D3" Foreground="White" FontSize="16" BorderBrush="White" Height="29" Click="loginButton_Click" TabIndex="2"/>
         <Button x:Name="logoutButton" Content="Logout" HorizontalAlignment="Left" Margin="10,602,0,0" VerticalAlignment="Top" Width="116" Background="#FF1976D3" FontSize="16" BorderBrush="White" Foreground="White" Height="29" Click="loginButton_Click" TabIndex="2"/>
