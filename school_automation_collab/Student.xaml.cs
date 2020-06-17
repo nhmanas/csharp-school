@@ -26,6 +26,16 @@ namespace School_Automation_Collab
 
             InitializeComponent();
         }
+        public Student(string name,string surname,int id,string faculty,string department,int year)
+        {
+            InitializeComponent();
+            nameLabel.Content = name;
+            surnameLabel.Content = surname;
+            idnumberLabel.Content=id;
+            facultyLabel.Content = faculty;
+            departmentLabel.Content = department;
+            yearLabel.Content = year;
+        }
 
         private void loginButton_Click(object sender, RoutedEventArgs e)
         {

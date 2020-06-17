@@ -225,6 +225,9 @@ namespace School_Automation_Collab
             }
             else
             {
+                query = "select * from students where number=@user_id";
+                var check2 = Database.query(query, lstParams);
+
                 messageHandle(colorOK, "Logging in...");
                 new WarningWindow(colorOK, "OK", "Log in successfull",new Student()).Show();
                 this.Close();
@@ -274,7 +277,7 @@ namespace School_Automation_Collab
             int type = 2 - authLevelCombo_signup.SelectedIndex;
 
 
-            query = $"INSERT INTO `access`(`name`, `user_id`, `pass`, `type`) VALUES (@name,@user_id,@pass,{type})";
+            query = $"INSERT INTO `access`(`name`, `user_id`, `pass`, `type`, `surname`) VALUES (@name,@user_id,@pass,{type},'')";
             lstParams = new List<cmdParameterType>
             {
                 new cmdParameterType("@name",signupBox_name.Text.Trim()),
@@ -287,6 +290,11 @@ namespace School_Automation_Collab
                 messageHandle(colorError, "Check your connection");
                 return;
             }
+            if (authLevelCombo_signup.SelectedIndex==0)
+            {
+                query = $"";
+            }
+            
             
             new WarningWindow(colorOK, "Success", "Signup Complete, Please Login").Show();
 
