@@ -225,6 +225,7 @@ namespace School_Automation_Collab
                 messageHandle(colorError, "There are multiple entries in the db");
                 return;
             }
+            var access = check.Rows[0];
             if (check.Rows[0]["type"].ToString()=="2")
             {
 
@@ -239,7 +240,6 @@ namespace School_Automation_Collab
 
                 messageHandle(colorOK, "Logging in...");
                 //Student(string name, string surname, int id, string faculty, string department, int year)
-                var access = check.Rows[0];
                 var students = check2.Rows[0];
                 
                 
@@ -264,6 +264,8 @@ namespace School_Automation_Collab
             else if(check.Rows[0]["type"].ToString() == "0")
             {
                 //admin
+                new WarningWindow(colorOK, "OK", "Log in successfull", new Admin("admin",access["name"],access["surname"])).Show();
+                this.Close();
             }
                 
             

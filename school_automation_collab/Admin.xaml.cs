@@ -23,13 +23,22 @@ namespace School_Automation_Collab
         {
             InitializeComponent();
         }
+        public Admin(string title, string name,string surname,string id)
+        {
+            InitializeComponent();
+            titleLabel.Content = title;
+            nameLabel.Content = name;
+            surnameLabel.Content = surname;
+            idnumberLabel.Content = id;
+        }
 
-        private void loginButton_Click(object sender, RoutedEventArgs e)
+
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void logout_click(object sender, RoutedEventArgs e)
         {
 
         }
