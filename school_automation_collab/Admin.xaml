@@ -152,7 +152,7 @@
                             <Label Content="Year:" HorizontalAlignment="Left" Margin="196,234,0,0" VerticalAlignment="Top"/>
                             <Button x:Name="deletestudentButtonC" Content="DELETE STUDENT" HorizontalAlignment="Left" Margin="10,287,0,0" VerticalAlignment="Top" Width="144" Height="31" Click="Button_Click" Background="#FFE60000" Foreground="White" ForceCursor="True" TabIndex="26"/>
                             <Button x:Name="savestudentButton" Content="Update student" HorizontalAlignment="Left" Margin="262,287,0,0" VerticalAlignment="Top" Width="167" Height="31" Background="#FF1976D3" Foreground="White" Click="Button_Click" TabIndex="25"/>
-                            <ComboBox x:Name="studentComboC" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" Width="311" SelectedIndex="0" TabIndex="17">
+                            <ComboBox x:Name="studentComboC" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" Width="311" SelectedIndex="0" TabIndex="17" DropDownClosed="studentComboC_Changed">
                                 <ComboBoxItem Content="SELECT STUDENT"/>
                             </ComboBox>
                             <Button x:Name="studentButtonC" Content="Select" HorizontalAlignment="Left" Margin="326,40,0,0" VerticalAlignment="Top" Width="103" Height="27" Click="Button_Click" TabIndex="18"/>
@@ -168,7 +168,7 @@
                             <ComboBox x:Name="studentdepartmentComboC" HorizontalAlignment="Left" Margin="245,209,0,0" VerticalAlignment="Top" Width="184" SelectedIndex="0" TabIndex="23">
                                 <ComboBoxItem Content="SELECT DEPARTMENT"/>
                             </ComboBox>
-                            <RadioButton x:Name="allstRadio" Content="List all students" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" BorderThickness="1" Padding="4,-4,0,0"/>
+                            <RadioButton IsChecked="True" x:Name="allstRadio" Content="List all students" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" BorderThickness="1" Padding="4,-4,0,0"/>
                             <RadioButton x:Name="limitstRadio" Content="Only list students with missing info" HorizontalAlignment="Left" Margin="164,10,0,0" VerticalAlignment="Top" BorderThickness="1" Padding="4,-4,0,0"/>
                         </Grid>
                     </GroupBox>
