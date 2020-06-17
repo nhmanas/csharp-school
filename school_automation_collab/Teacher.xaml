@@ -33,11 +33,19 @@
             </TabItem>
             <TabItem x:Name="tabExam" Header="Grade students">
                 <Grid Background="#FFFFFFFF">
-                    <DataGrid HorizontalAlignment="Left" Height="530" Margin="10,10,0,0" VerticalAlignment="Top" Width="936"/>
+                    <DataGrid x:Name="gradestudentsGrid" HorizontalAlignment="Left" Height="498" Margin="10,42,0,0" VerticalAlignment="Top" Width="936"/>
+                    <TextBox x:Name="finalgradeBox" HorizontalAlignment="Left" Height="27" Margin="830,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="36"/>
+                    <Button x:Name="savegradeButton" Content="Update" HorizontalAlignment="Left" Margin="871,10,0,0" VerticalAlignment="Top" Width="75" Height="27"/>
+                    <ComboBox HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="388" SelectedIndex="0">
+                        <ComboBoxItem Content="SELECT COURSE"/>
+                    </ComboBox>
+                    <TextBox x:Name="midtermgradeBox" HorizontalAlignment="Left" Height="27" Margin="789,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="36"/>
+                    <ComboBox x:Name="selectcourseCombo" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="388" SelectedIndex="0">
+                        <ComboBoxItem Content="SELECT COURSE"/>
+                    </ComboBox>
                 </Grid>
             </TabItem>
         </TabControl>
-        <Button x:Name="testButton" Content="Test" HorizontalAlignment="Left" Margin="856,602,0,0" VerticalAlignment="Top" Width="116" Background="#FF1976D3" FontSize="16" BorderBrush="White" Foreground="White" Height="29" Click="loginButton_Click" TabIndex="2"/>
         <Button x:Name="logoutButton" Content="Logout" HorizontalAlignment="Left" Margin="10,602,0,0" VerticalAlignment="Top" Width="116" Background="#FF1976D3" FontSize="16" BorderBrush="White" Foreground="White" Height="29" Click="loginButton_Click" TabIndex="2"/>
 
     </Grid>

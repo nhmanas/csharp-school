@@ -8,12 +8,10 @@
         Title="Student: NAME" Height="680" Width="1000" WindowStyle="SingleBorderWindow" MaxHeight="680" MaxWidth="1000" MinHeight="680" MinWidth="1000" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" FontSize="16">
     <Grid Background="#FF1976D3" Margin="0,0,0,0">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="61*"/>
-            <ColumnDefinition Width="81*"/>
         </Grid.ColumnDefinitions>
 
         <Rectangle Fill="#FF1976D3" HorizontalAlignment="Left" Height="38" Stroke="Black" VerticalAlignment="Top" Width="993" Grid.IsSharedSizeScope="True" StrokeThickness="0" Grid.ColumnSpan="2"/>
-        <TabControl HorizontalAlignment="Left" Height="583" Margin="10,10,0,0" VerticalAlignment="Top" Width="962" FontSize="16" Grid.ColumnSpan="2">
+        <TabControl HorizontalAlignment="Left" Margin="10,10,0,58" Width="962" FontSize="16" Grid.ColumnSpan="2">
             <TabItem x:Name="tabHome" Header="Home">
                 <Grid Background="#FFFFFFFF">
                     <GroupBox Header="General information" HorizontalAlignment="Left" Height="245" Margin="10,10,0,0" VerticalAlignment="Top" Width="936">
@@ -37,49 +35,12 @@
                     </GroupBox>
                 </Grid>
             </TabItem>
-            <TabItem x:Name="tabCourse" Header="Course enrolment">
-                <Grid Background="#FFFFFFFF">
-                    <GroupBox Header="Course Information" HorizontalAlignment="Left" Height="530" Margin="10,10,0,0" VerticalAlignment="Top" Width="480">
-                        <Grid Background="#FFFFFFFF">
-                            <Button x:Name="getCourseButton" Content="Get Info" HorizontalAlignment="Left" Margin="382,10,0,0" VerticalAlignment="Top" Width="76" Height="27"/>
-                            <ComboBox x:Name="courseComboBox" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="367" SelectedIndex="0">
-                                <ComboBoxItem Content="SELECT COURSE"/>
-                            </ComboBox>
-                            <Label Content="Class code: " HorizontalAlignment="Left" Margin="43,77,0,0" VerticalAlignment="Top"/>
-                            <Label Content="Available hours: " HorizontalAlignment="Left" Margin="10,108,0,0" VerticalAlignment="Top"/>
-                            <RichTextBox x:Name="coursenotesBox" HorizontalAlignment="Left" Height="155" Margin="140,271,0,0" VerticalAlignment="Top" Width="318" IsReadOnly="True">
-                                <FlowDocument>
-                                    <Paragraph>
-                                        <Run Text="RichTextBox"/>
-                                    </Paragraph>
-                                </FlowDocument>
-                            </RichTextBox>
-                            <Label Content="Notes: " HorizontalAlignment="Left" Margin="75,267,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.467,3.129"/>
-                            <Button Content="Enroll" HorizontalAlignment="Left" Margin="382,465,0,0" VerticalAlignment="Top" Width="76" Height="27" Click="Button_Click"/>
-                            <Label Content="Credits: " HorizontalAlignment="Left" Margin="68,139,0,0" VerticalAlignment="Top"/>
-                            <Label Content="ECTS: " HorizontalAlignment="Left" Margin="83,170,0,0" VerticalAlignment="Top"/>
-                            <Label Content="Availability: " HorizontalAlignment="Left" Margin="43,201,0,0" VerticalAlignment="Top"/>
-                            <Label Content="Instructor name: " HorizontalAlignment="Left" Margin="6,46,0,0" VerticalAlignment="Top"/>
-                            <Label x:Name="instructornameLabel" Content="instructornameLabel" HorizontalAlignment="Left" Margin="140,46,0,0" VerticalAlignment="Top"/>
-                            <Label x:Name="classcodeLabel" Content="classcodeLabel" HorizontalAlignment="Left" Margin="140,77,0,0" VerticalAlignment="Top"/>
-                            <Label x:Name="availablehoursLabel" Content="availablehoursLabel" HorizontalAlignment="Left" Margin="140,108,0,0" VerticalAlignment="Top"/>
-                            <Label x:Name="creditsLabel" Content="creditsLabel" HorizontalAlignment="Left" Margin="140,139,0,0" VerticalAlignment="Top"/>
-                            <Label x:Name="ectsLabel" Content="ectsLabel" HorizontalAlignment="Left" Margin="142,170,0,0" VerticalAlignment="Top"/>
-                            <Label x:Name="availabilityLabel" Content="availabilityLabel" HorizontalAlignment="Left" Margin="140,201,0,0" VerticalAlignment="Top"/>
-                        </Grid>
-                    </GroupBox>
-                    <GroupBox Header="Credit Information" HorizontalAlignment="Left" Height="530" Margin="495,10,0,0" VerticalAlignment="Top" Width="451">
-                        <Grid Background="#FFFFFFFF"/>
-                    </GroupBox>
-                </Grid>
-            </TabItem>
             <TabItem x:Name="tabExam" Header="Exam results">
                 <Grid Background="#FFFFFFFF">
-                    <Button Content="Button" HorizontalAlignment="Left" Margin="181,149,0,0" VerticalAlignment="Top" Width="75"/>
+                    <DataGrid x:Name="examresultsGrid" HorizontalAlignment="Left" Height="530" Margin="10,10,0,0" VerticalAlignment="Top" Width="936"/>
                 </Grid>
             </TabItem>
         </TabControl>
-        <Button x:Name="testButton" Content="Test" HorizontalAlignment="Left" Margin="429,602,0,0" VerticalAlignment="Top" Width="116" Background="#FF1976D3" FontSize="16" BorderBrush="White" Foreground="White" Height="29" Click="loginButton_Click" TabIndex="2" Grid.Column="1"/>
         <Button x:Name="logoutButton" Content="Logout" HorizontalAlignment="Left" Margin="10,602,0,0" VerticalAlignment="Top" Width="116" Background="#FF1976D3" FontSize="16" BorderBrush="White" Foreground="White" Height="29" Click="loginButton_Click" TabIndex="2"/>
 
     </Grid>
