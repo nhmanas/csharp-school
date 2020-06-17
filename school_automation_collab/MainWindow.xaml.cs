@@ -229,7 +229,24 @@ namespace School_Automation_Collab
                 var check2 = Database.query(query, lstParams);
 
                 messageHandle(colorOK, "Logging in...");
-                new WarningWindow(colorOK, "OK", "Log in successfull",new Student()).Show();
+                //Student(string name, string surname, int id, string faculty, string department, int year)
+                var access = check.Rows[0];
+                var students = check2.Rows[0];
+                query = $"select * from departments where id={students["department_id"]}";
+                var department = Database.query(query, lstParams).Rows[0];
+                query = $"select * from faculties where id={department["faculty_id"]}";
+                var faculty = Database.query(query, lstParams).Rows[0];
+                
+                new WarningWindow(colorOK, "OK", "Log in successfull",
+                    new Student(
+                        access["name"].ToString(),
+                        access["surname"].ToString(),
+                        (int)access["user_id"],
+                        faculty["name"].ToString(),
+                        department["name"].ToString(),
+                        students["year"].ToString()
+                        )
+                    ).Show();
                 this.Close();
                 
             }
@@ -290,9 +307,19 @@ namespace School_Automation_Collab
                 messageHandle(colorError, "Check your connection");
                 return;
             }
-            if (authLevelCombo_signup.SelectedIndex==0)
+            if (authLevelCombo_signup.SelectedIndex==0) //if student
             {
-                query = $"";
+                query = $"insert into students (number,faculty_id,department_id,year) values (@user_id,1,1,{DateTime.Now.Year})";
+                check = Database.query(query, lstParams);
+                if (check==null)
+                {
+                    messageHandle(colorError, "Check your connection");
+                    return;
+                }
+            }
+            else
+            {
+                //onay sütunu bekleniyor
             }
             
             

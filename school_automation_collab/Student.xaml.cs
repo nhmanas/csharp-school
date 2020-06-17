@@ -26,7 +26,7 @@ namespace School_Automation_Collab
 
             InitializeComponent();
         }
-        public Student(string name,string surname,int id,string faculty,string department,int year)
+        public Student(string name,string surname,int id,string faculty,string department,string year)
         {
             InitializeComponent();
             nameLabel.Content = name;
