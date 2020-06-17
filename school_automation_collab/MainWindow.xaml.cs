@@ -218,13 +218,17 @@ namespace School_Automation_Collab
             else if (check.Rows.Count == 0)
             {
                 messageHandle(colorWarning, "Incorrect username or password");
+                return;
             }
             else if (check.Rows.Count > 1)
             {
                 messageHandle(colorError, "There are multiple entries in the db");
+                return;
             }
-            else
+            if (check.Rows[0]["type"].ToString()=="2")
             {
+
+
                 query = "select * from students where number=@user_id";
                 var check2 = Database.query(query, lstParams);
 
@@ -248,8 +252,19 @@ namespace School_Automation_Collab
                         )
                     ).Show();
                 this.Close();
-                
             }
+            else if (check.Rows[0]["type"].ToString() == "1")
+            {
+                //teacher
+                new WarningWindow(colorOK, "OK", "Log in successfull", new Teacher()).Show();
+                this.Close();
+            }
+            else if(check.Rows[0]["type"].ToString() == "0")
+            {
+                //admin
+            }
+                
+            
             //this.Hide();
             //Window1 win1 = new Window1();
             //win1.Show();
@@ -319,7 +334,13 @@ namespace School_Automation_Collab
             }
             else
             {
-                //onay sütunu bekleniyor
+                query = $"insert into instructors (number,updated_at) values (@user_id,current_timestamp())";
+                check = Database.query(query, lstParams);
+                if (check == null)
+                {
+                    messageHandle(colorError, "Check your connection");
+                    return;
+                }
             }
             
             
