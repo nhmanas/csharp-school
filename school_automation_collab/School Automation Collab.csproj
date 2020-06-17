@@ -156,6 +156,7 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="BlueHead.png" />
+    <Resource Include="Image1.png" />
     <Content Include="packages\BouncyCastle.1.8.3.1\lib\BouncyCastle.Crypto.dll" />
     <Content Include="packages\Google.Protobuf.3.6.1\lib\net45\Google.Protobuf.dll" />
     <Resource Include="packages\Google.Protobuf.3.6.1\lib\net45\Google.Protobuf.xml" />

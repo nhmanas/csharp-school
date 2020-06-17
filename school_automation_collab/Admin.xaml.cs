@@ -33,5 +33,10 @@ namespace School_Automation_Collab
         {
 
         }
+
+        private void teacherokButton_Click(object sender, RoutedEventArgs e)
+        {
+            //bilgileri girmeden onaylattırtma xD
+        }
     }
 }
