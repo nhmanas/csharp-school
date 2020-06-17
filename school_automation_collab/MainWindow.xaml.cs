@@ -218,18 +218,55 @@ namespace School_Automation_Collab
             else if (check.Rows.Count == 0)
             {
                 messageHandle(colorWarning, "Incorrect username or password");
+                return;
             }
             else if (check.Rows.Count > 1)
             {
                 messageHandle(colorError, "There are multiple entries in the db");
+                return;
             }
-            else
+            if (check.Rows[0]["type"].ToString()=="2")
             {
+
+
+                query = "select * from students where number=@user_id";
+                var check2 = Database.query(query, lstParams);
+                if (check2==null)
+                {
+                    messageHandle(colorError, "???");
+                    return;
+                }
+
                 messageHandle(colorOK, "Logging in...");
-                new WarningWindow(colorOK, "OK", "Log in successfull",new Student()).Show();
-                this.Close();
+                //Student(string name, string surname, int id, string faculty, string department, int year)
+                var access = check.Rows[0];
+                var students = check2.Rows[0];
                 
+                
+                new WarningWindow(colorOK, "OK", "Log in successfull",
+                    new Student(
+                        access["name"].ToString(),
+                        access["surname"].ToString(),
+                        (int)access["user_id"],
+                        (int)students["faculty_id"],
+                        (int)students["department_id"],
+                        students["year"].ToString()
+                        )
+                    ).Show();
+                this.Close();
             }
+            else if (check.Rows[0]["type"].ToString() == "1")
+            {
+                //teacher
+                new WarningWindow(colorOK, "OK", "Log in successfull", new Teacher()).Show();
+                this.Close();
+            }
+            else if(check.Rows[0]["type"].ToString() == "0")
+            {
+                //admin
+            }
+                
+            
             //this.Hide();
             //Window1 win1 = new Window1();
             //win1.Show();
@@ -274,7 +311,7 @@ namespace School_Automation_Collab
             int type = 2 - authLevelCombo_signup.SelectedIndex;
 
 
-            query = $"INSERT INTO `access`(`name`, `user_id`, `pass`, `type`) VALUES (@name,@user_id,@pass,{type})";
+            query = $"INSERT INTO `access`(`name`, `user_id`, `pass`, `type`, `surname`) VALUES (@name,@user_id,@pass,{type},'')";
             lstParams = new List<cmdParameterType>
             {
                 new cmdParameterType("@name",signupBox_name.Text.Trim()),
@@ -287,6 +324,27 @@ namespace School_Automation_Collab
                 messageHandle(colorError, "Check your connection");
                 return;
             }
+            if (authLevelCombo_signup.SelectedIndex==0) //if student
+            {
+                query = $"insert into students (number,faculty_id,department_id,year,updated_at) values (@user_id,1,1,{DateTime.Now.Year},current_timestamp())";
+                check = Database.query(query, lstParams);
+                if (check==null)
+                {
+                    messageHandle(colorError, "Check your connection");
+                    return;
+                }
+            }
+            else
+            {
+                query = $"insert into instructors (number,updated_at) values (@user_id,current_timestamp())";
+                check = Database.query(query, lstParams);
+                if (check == null)
+                {
+                    messageHandle(colorError, "Check your connection");
+                    return;
+                }
+            }
+            
             
             new WarningWindow(colorOK, "Success", "Signup Complete, Please Login").Show();
 
