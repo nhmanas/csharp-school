@@ -300,7 +300,6 @@ namespace School_Automation_Collab
             return true;
         }
 
-        
     }
     public class ComboboxItem
     {
