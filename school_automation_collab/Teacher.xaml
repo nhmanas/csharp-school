@@ -29,6 +29,39 @@
                             <Label x:Name="titleLabel" Content="prof, doç, falan ya da admin gelecek" HorizontalAlignment="Left" Margin="357,10,0,0" VerticalAlignment="Top"/>
                         </Grid>
                     </GroupBox>
+                    <GroupBox Header="Weekly schedule" HorizontalAlignment="Left" Height="280" Margin="10,260,0,0" VerticalAlignment="Top" Width="936">
+                        <Grid Background="#FF1976D3">
+                            <Label Content="Mon" HorizontalAlignment="Left" Margin="164,10,0,0" VerticalAlignment="Top" Width="146" HorizontalContentAlignment="Center" Foreground="White"/>
+                            <Label Content="Tue" HorizontalAlignment="Left" Margin="327,10,0,0" VerticalAlignment="Top" Width="122" HorizontalContentAlignment="Center" Foreground="White"/>
+                            <Label Content="Wed" HorizontalAlignment="Left" Margin="471,10,0,0" VerticalAlignment="Top" Width="141" HorizontalContentAlignment="Center" Foreground="White"/>
+                            <Label Content="Thu" HorizontalAlignment="Left" Margin="629,10,0,0" VerticalAlignment="Top" Width="123" HorizontalContentAlignment="Center" Foreground="White"/>
+                            <Label Content="Fri" HorizontalAlignment="Left" Margin="792,10,0,0" VerticalAlignment="Top" Width="93" HorizontalContentAlignment="Center" Foreground="White"/>
+                            <Label Content="09:00 - 12:00" HorizontalAlignment="Left" Margin="10,57,0,0" VerticalAlignment="Top" Foreground="White"/>
+                            <Label Content="13:00 - 16:00" HorizontalAlignment="Left" Margin="10,190,0,0" VerticalAlignment="Top" Foreground="White"/>
+                            <Label x:Name="mon1" Content="Label" HorizontalAlignment="Left" Margin="164,46,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="52" Width="146" Foreground="White"/>
+                            <Label x:Name="tue1" Content="Label" HorizontalAlignment="Left" Margin="315,46,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="52" Width="146" Foreground="White"/>
+                            <Label x:Name="wed1" Content="Label" HorizontalAlignment="Left" Margin="466,46,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="52" Width="146" Foreground="White"/>
+                            <Label x:Name="thu1" Content="Label" HorizontalAlignment="Left" Margin="617,46,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="52" Width="146" Foreground="White"/>
+                            <Label x:Name="fri1" Content="Label" HorizontalAlignment="Left" Margin="768,46,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="52" Width="146" Foreground="White"/>
+                            <Label x:Name="mon2" Content="Label" HorizontalAlignment="Left" Margin="164,179,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="52" Width="146" Foreground="White"/>
+                            <Label x:Name="tue2" Content="Label" HorizontalAlignment="Left" Margin="315,179,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="52" Width="146" Foreground="White"/>
+                            <Label x:Name="wed2" Content="Label" HorizontalAlignment="Left" Margin="466,179,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="52" Width="146" Foreground="White"/>
+                            <Label x:Name="thu2" Content="Label" HorizontalAlignment="Left" Margin="617,179,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="52" Width="146" Foreground="White"/>
+                            <Label x:Name="fri2" Content="Label" HorizontalAlignment="Left" Margin="768,179,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="52" Width="146" Foreground="White"/>
+                            <Label Content="12:00 - 13:00" HorizontalAlignment="Left" Margin="10,124,0,0" VerticalAlignment="Top" Foreground="White"/>
+
+                            <Label Content="Label" HorizontalAlignment="Left" Margin="0,109,0,0" VerticalAlignment="Top" Width="924" Background="White" Foreground="White" ForceCursor="True" Height="2"/>
+                            <Label Content="Label" HorizontalAlignment="Left" Margin="0,170,0,0" VerticalAlignment="Top" Width="924" Background="White" Foreground="White" ForceCursor="True" Height="2"/>
+                            <Label Content="Label" HorizontalAlignment="Left" Margin="0,46,0,0" VerticalAlignment="Top" Width="924" Background="White" Foreground="White" ForceCursor="True" Height="2"/>
+                            <Label Content="Label" HorizontalAlignment="Left" Margin="155,0,0,0" VerticalAlignment="Top" Width="2" Background="White" Foreground="White" ForceCursor="True" Height="252"/>
+                            <Label Content="Label" HorizontalAlignment="Left" Margin="320,0,0,0" VerticalAlignment="Top" Width="2" Background="White" Foreground="White" ForceCursor="True" Height="252"/>
+                            <Label Content="Label" HorizontalAlignment="Left" Margin="471,0,0,0" VerticalAlignment="Top" Width="2" Background="White" Foreground="White" ForceCursor="True" Height="252"/>
+                            <Label Content="Label" HorizontalAlignment="Left" Margin="622,0,0,0" VerticalAlignment="Top" Width="2" Background="White" Foreground="White" ForceCursor="True" Height="252"/>
+                            <Label Content="Label" HorizontalAlignment="Left" Margin="763,0,0,0" VerticalAlignment="Top" Width="2" Background="White" Foreground="White" ForceCursor="True" Height="252"/>
+                            <Label x:Name="mon1_Copy9" Content="Label" HorizontalAlignment="Left" Margin="157,111,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="59" Width="767" Background="#FFFFBE00" Foreground="White"/>
+
+                        </Grid>
+                    </GroupBox>
                 </Grid>
             </TabItem>
             <TabItem x:Name="tabExam" Header="Grade students">
