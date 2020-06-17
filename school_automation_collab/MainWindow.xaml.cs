@@ -225,6 +225,7 @@ namespace School_Automation_Collab
                 messageHandle(colorError, "There are multiple entries in the db");
                 return;
             }
+            var access = check.Rows[0];
             if (check.Rows[0]["type"].ToString()=="2")
             {
 
@@ -239,7 +240,6 @@ namespace School_Automation_Collab
 
                 messageHandle(colorOK, "Logging in...");
                 //Student(string name, string surname, int id, string faculty, string department, int year)
-                var access = check.Rows[0];
                 var students = check2.Rows[0];
                 
                 
@@ -258,12 +258,52 @@ namespace School_Automation_Collab
             else if (check.Rows[0]["type"].ToString() == "1")
             {
                 //teacher
-                new WarningWindow(colorOK, "OK", "Log in successfull", new Teacher()).Show();
+                query = "select * from instructors where number=@number";
+                lstParams=new List<cmdParameterType> { new cmdParameterType("@number", check.Rows[0]["user_id"]) };
+                check = Database.query(query, lstParams);
+                if (check==null)
+                {
+                    messageHandle(colorError, "Check your connection");
+                    return;
+                }
+                else if (check.Rows.Count == 0)
+                {
+                    messageHandle(colorWarning, "Incorrect username or password");
+                    return;
+                }
+                else if (check.Rows.Count > 1)
+                {
+                    messageHandle(colorError, "There are multiple entries in the instructors db");
+                    return;
+                }
+                if (check.Rows[0]["status"].ToString()=="0")
+                {
+                    new WarningWindow(colorWarning, "Waiting Approve","Your Teacher account must be \napproved by admin to continue").Show();
+                    return;
+                }
+
+
+                new WarningWindow(colorOK, "OK", "Log in successfull", 
+                    new Teacher(
+                        access["name"].ToString()
+                        ,access["surname"].ToString(),
+                        access["user_id"].ToString()
+                        )
+                    ).Show();
                 this.Close();
             }
             else if(check.Rows[0]["type"].ToString() == "0")
             {
                 //admin
+                new WarningWindow(colorOK, "OK", "Log in successfull", 
+                    new Admin(
+                        "admin",
+                        access["name"].ToString(),
+                        access["surname"].ToString(),
+                        access["user_id"].ToString()
+                        )
+                    ).Show();
+                this.Close();
             }
                 
             
