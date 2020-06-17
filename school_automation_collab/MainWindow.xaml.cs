@@ -231,23 +231,25 @@ namespace School_Automation_Collab
 
                 query = "select * from students where number=@user_id";
                 var check2 = Database.query(query, lstParams);
+                if (check2==null)
+                {
+                    messageHandle(colorError, "???");
+                    return;
+                }
 
                 messageHandle(colorOK, "Logging in...");
                 //Student(string name, string surname, int id, string faculty, string department, int year)
                 var access = check.Rows[0];
                 var students = check2.Rows[0];
-                query = $"select * from departments where id={students["department_id"]}";
-                var department = Database.query(query, lstParams).Rows[0];
-                query = $"select * from faculties where id={department["faculty_id"]}";
-                var faculty = Database.query(query, lstParams).Rows[0];
+                
                 
                 new WarningWindow(colorOK, "OK", "Log in successfull",
                     new Student(
                         access["name"].ToString(),
                         access["surname"].ToString(),
                         (int)access["user_id"],
-                        faculty["name"].ToString(),
-                        department["name"].ToString(),
+                        (int)students["faculty_id"],
+                        (int)students["department_id"],
                         students["year"].ToString()
                         )
                     ).Show();
@@ -324,7 +326,7 @@ namespace School_Automation_Collab
             }
             if (authLevelCombo_signup.SelectedIndex==0) //if student
             {
-                query = $"insert into students (number,faculty_id,department_id,year) values (@user_id,1,1,{DateTime.Now.Year})";
+                query = $"insert into students (number,faculty_id,department_id,year,updated_at) values (@user_id,1,1,{DateTime.Now.Year},current_timestamp())";
                 check = Database.query(query, lstParams);
                 if (check==null)
                 {
