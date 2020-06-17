@@ -22,6 +22,7 @@ namespace School_Automation_Collab
     public partial class Admin : Window
     {
         DataTable studentList=new DataTable();
+        DataTable teacherList = new DataTable();
         DataTable facultyList = new DataTable();
         DataTable departmentList = new DataTable();
         DataTable courseList = new DataTable();
@@ -45,9 +46,21 @@ namespace School_Automation_Collab
             {
                 new WarningWindow().Show();
                 this.Close();
-            }
-            
+            }            
             studentList = check;
+
+            query = "select * from instructors join access on access.user_id=instructors.number where status=0";
+            check = Database.query(query);
+            if (check == null)
+            {
+                new WarningWindow().Show();
+                this.Close();
+            }
+            teacherList = check;
+            foreach (DataRow item in teacherList.Rows)
+            {
+                teacherComboApprove.Items.Add(item["number"]);
+            }
 
             for (int i = 0; i < studentList.Rows.Count; i++)
             {
@@ -218,6 +231,75 @@ namespace School_Automation_Collab
                 yearBox.Text = studentList.Rows[studentComboC.SelectedIndex - 1]["year"].ToString();
             }
         }
+
+        private void teacherokButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (teacherComboApprove.SelectedIndex==0)
+            {
+                new WarningWindow(MainWindow.colorWarning, "Selection Needed", "Select a teacher to continue").Show();
+                return;
+            }
+            var query = "update instructors set status=1 where number=@number";
+            var lstParams = new List<cmdParameterType> { new cmdParameterType("@number", teacherComboApprove.SelectedItem) };
+            var check = Database.query(query, lstParams);
+            if (check==null)
+            {
+                new WarningWindow(MainWindow.colorError, "DB Error", "Updating error").Show();
+                return;
+            }
+            if (!updateTeacherApprove())
+            {
+                return;
+            }
+            new WarningWindow(MainWindow.colorOK, "Success", "Teacher Approved").Show();
+
+
+        }
+        private void teacherDeny_Click(object sender, RoutedEventArgs e)
+        {
+            if (teacherComboApprove.SelectedIndex == 0)
+            {
+                new WarningWindow(MainWindow.colorWarning, "Selection Needed", "Select a teacher to continue").Show();
+                return;
+            }
+            var query = "delete from instructors where number=@number; delete from access where user_id=@number";
+            var lstParams = new List<cmdParameterType> { new cmdParameterType("@number", teacherComboApprove.SelectedItem) };
+            var check = Database.query(query, lstParams);
+            if (check == null)
+            {
+                new WarningWindow(MainWindow.colorError, "DB Error", "Updating error").Show();
+                return;
+            }
+            if (!updateTeacherApprove())
+            {
+                return;
+            }
+            new WarningWindow(MainWindow.colorOK, "Success", "Teacher Denied").Show();
+        }
+        private bool updateTeacherApprove()
+        {
+            teacherComboApprove.SelectedIndex = 0;
+            int count = teacherComboApprove.Items.Count - 1;
+            for (int i = 0; i < count; i++)
+            {
+                teacherComboApprove.Items.Remove(teacherComboApprove.Items[1]);
+            }
+            var query = "select * from instructors join access on access.user_id=instructors.number where status=0";
+            var check = Database.query(query);
+            if (check == null)
+            {
+                new WarningWindow(MainWindow.colorError, "DB Error", "Select teachers error").Show();
+                return false;
+            }
+            teacherList = check;
+            foreach (DataRow item in teacherList.Rows)
+            {
+                teacherComboApprove.Items.Add(item["number"]);
+            }
+            return true;
+        }
+
+        
     }
     public class ComboboxItem
     {

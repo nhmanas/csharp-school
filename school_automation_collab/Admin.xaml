@@ -179,11 +179,11 @@
                             <Label x:Name="facultyLabel" Content="VERY_LONG_FACULTY_LABEL" HorizontalAlignment="Left" Margin="357,134,0,0" VerticalAlignment="Top"/>
                             <Label Content="Title:" HorizontalAlignment="Left" Margin="290,10,0,0" VerticalAlignment="Top"/>
                             <Label x:Name="titleLabel1" Content="prof, doç, falan ya da admin gelecek" HorizontalAlignment="Left" Margin="357,10,0,0" VerticalAlignment="Top"/>
-                            <Button x:Name="teacherokButton" Content="Approve account" Background="#FF1976D3" Foreground="White" HorizontalAlignment="Left" Margin="774,202,0,0" VerticalAlignment="Top" Width="140" Height="27"/>
-                            <Button x:Name="teacherokButton_Copy" Content="Deny request" Background="#FFE60000" Foreground="White" HorizontalAlignment="Left" Margin="629,202,0,0" VerticalAlignment="Top" Width="140" Height="27"/>
+                            <Button x:Name="teacherokButton" Content="Approve account" Background="#FF1976D3" Foreground="White" HorizontalAlignment="Left" Margin="774,202,0,0" VerticalAlignment="Top" Width="140" Height="27" Click="teacherokButton_Click"/>
+                            <Button x:Name="teacherokButton_Copy" Content="Deny request" Background="#FFE60000" Foreground="White" HorizontalAlignment="Left" Margin="629,202,0,0" VerticalAlignment="Top" Width="140" Height="27" Click="teacherDeny_Click"/>
                         </Grid>
                     </GroupBox>
-                    <ComboBox HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="349" SelectedIndex="0">
+                    <ComboBox x:Name="teacherComboApprove" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="349" SelectedIndex="0">
                         <ComboBoxItem Content="SELECT TEACHER NAME"/>
                     </ComboBox>
                     <Button Content="Select" HorizontalAlignment="Left" Margin="364,10,0,0" VerticalAlignment="Top" Width="75" Height="27"/>
