@@ -43,6 +43,7 @@ namespace School_Automation_Collab
             facultyLabel.Content = facultyName["name"];
             departmentLabel.Content = departmentName["name"];
             yearLabel.Content = year;
+
         }
 
         private void loginButton_Click(object sender, RoutedEventArgs e)
