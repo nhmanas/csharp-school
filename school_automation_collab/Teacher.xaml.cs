@@ -24,14 +24,17 @@ namespace School_Automation_Collab
             InitializeComponent();
         }
 
-        private void loginButton_Click(object sender, RoutedEventArgs e)
-        {
 
-        }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void logoutButton_Click(object sender, RoutedEventArgs e)
+        {
+            new WarningWindow(MainWindow.colorOK, "OK", "Logout successfull", new MainWindow());
+            this.Close();
         }
     }
 }

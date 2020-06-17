@@ -264,7 +264,14 @@ namespace School_Automation_Collab
             else if(check.Rows[0]["type"].ToString() == "0")
             {
                 //admin
-                new WarningWindow(colorOK, "OK", "Log in successfull", new Admin("admin",access["name"],access["surname"])).Show();
+                new WarningWindow(colorOK, "OK", "Log in successfull", 
+                    new Admin(
+                        "admin",
+                        access["name"].ToString(),
+                        access["surname"].ToString(),
+                        access["user_id"].ToString()
+                        )
+                    ).Show();
                 this.Close();
             }
                 

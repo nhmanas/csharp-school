@@ -20,7 +20,14 @@ namespace School_Automation_Collab
     public partial class WarningWindow : Window
     {
         Window a;
-        public WarningWindow(string headerBackground, string Title, string Content, Window a=null)
+        public WarningWindow()
+        {
+            wwHeader.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString(MainWindow.colorError));
+            wwHeader.Content = "Connection error";
+            wwContent.Content = "There are errors with db";
+            this.a = new MainWindow();
+        }
+            public WarningWindow(string headerBackground, string Title, string Content, Window a=null)
         {
 
             InitializeComponent();

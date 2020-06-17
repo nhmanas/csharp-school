@@ -62,6 +62,45 @@ namespace School_Automation_Collab.sql
             }
             
         }
+        public static DataTable query(string query)
+        {
+            var lstParameters = new List<cmdParameterType>();
+            var dbCon = new DBConnection();
+            dbCon.DatabaseName = "viovasof_cse";
+            var dtTable = new DataTable();
+            if (dbCon.IsConnect())
+            {
+                using (dbCon.Connection)
+                {
+                    using (MySqlCommand command = new MySqlCommand(query, dbCon.Connection))
+                    {
+                        foreach (var vrPerParameter in lstParameters)
+                        {
+                            command.Parameters.AddWithValue(vrPerParameter.parameterName, vrPerParameter.objParam);
+                        }
+                        try
+                        {
+                            dbCon.Connection.Open();
+                            dtTable.Load(command.ExecuteReader());
+                        }
+                        catch (Exception e)
+                        {
+                            MessageBox.Show(e.ToString());
+                            return null;
+                        }
+
+
+                    }
+                }
+                dbCon.Close();
+                return dtTable;
+            }
+            else
+            {
+                return null;
+            }
+
+        }
 
     }
 }

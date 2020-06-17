@@ -41,7 +41,7 @@
                                 </FlowDocument>
                             </RichTextBox>
                             <Label Content="Notes: " HorizontalAlignment="Left" Margin="75,267,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.467,3.129"/>
-                            <Button x:Name="enrollstudentButton" Content="Enroll student to this class" HorizontalAlignment="Left" Margin="252,461,0,0" VerticalAlignment="Top" Width="206" Height="31" Click="Button_Click"/>
+                            <Button x:Name="enrollstudentButton" Content="Enroll student to this class" HorizontalAlignment="Left" Margin="252,461,0,0" VerticalAlignment="Top" Width="206" Height="31" Click="enroll_Click"/>
                             <Label Content="Credits: " HorizontalAlignment="Left" Margin="68,100,0,0" VerticalAlignment="Top"/>
                             <Label Content="ECTS: " HorizontalAlignment="Left" Margin="83,131,0,0" VerticalAlignment="Top"/>
                             <Label Content="Availability: " HorizontalAlignment="Left" Margin="43,162,0,0" VerticalAlignment="Top"/>
@@ -56,10 +56,10 @@
                     </GroupBox>
                     <GroupBox Header="Course selection" HorizontalAlignment="Left" Height="169" Margin="10,10,0,0" VerticalAlignment="Top" Width="451">
                         <Grid Background="#FFFFFFFF">
-                            <ComboBox x:Name="facultyCombo" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="419" SelectedIndex="0">
-                                <ComboBoxItem Content="SELECT FACULTY"/>
+                            <ComboBox x:Name="facultyCombo" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="419" SelectedIndex="0" DropDownClosed="facultyCombo_changed">
+                                <ComboBoxItem Content="SELECT FACULTY FIRST"/>
                             </ComboBox>
-                            <ComboBox x:Name="departmentCombo" HorizontalAlignment="Left" Margin="10,42,0,0" VerticalAlignment="Top" Width="419" SelectedIndex="0">
+                            <ComboBox x:Name="departmentCombo" HorizontalAlignment="Left" Margin="10,42,0,0" VerticalAlignment="Top" Width="419" SelectedIndex="0" DropDownClosed="departmentCombo_Changed">
                                 <ComboBoxItem Content="SELECT DEPARTMENT"/>
                             </ComboBox>
                             <ComboBox x:Name="courseCombo" HorizontalAlignment="Left" Margin="10,74,0,0" VerticalAlignment="Top" Width="311" SelectedIndex="0">
@@ -81,11 +81,9 @@
                             <Label x:Name="yearLabel1" Content="YEAR_LABEL" HorizontalAlignment="Left" Margin="260,165,0,0" VerticalAlignment="Top"/>
                             <Label Content="GPA:" HorizontalAlignment="Left" Margin="196,196,0,0" VerticalAlignment="Top"/>
                             <Label x:Name="gpaLabel1" Content="4.00" HorizontalAlignment="Left" Margin="260,196,0,0" VerticalAlignment="Top" Foreground="#FF61B600"/>
-                            <Button x:Name="refreshButton" Content="Refresh" HorizontalAlignment="Left" Margin="285,287,0,0" VerticalAlignment="Top" Width="144" Height="31" Click="Button_Click"/>
-                            <ComboBox x:Name="studentCombo" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="311" SelectedIndex="0">
+                            <ComboBox x:Name="studentCombo" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="419" SelectedIndex="0" SelectionChanged="studentCombo_changed">
                                 <ComboBoxItem Content="SELECT STUDENT"/>
                             </ComboBox>
-                            <Button x:Name="studentButton" Content="Select" HorizontalAlignment="Left" Margin="326,10,0,0" VerticalAlignment="Top" Width="103" Height="27" Click="Button_Click"/>
                         </Grid>
                     </GroupBox>
                 </Grid>
@@ -152,7 +150,7 @@
                             <Label Content="Year:" HorizontalAlignment="Left" Margin="196,177,0,0" VerticalAlignment="Top"/>
                             <Button x:Name="deletestudentButtonC" Content="DELETE STUDENT" HorizontalAlignment="Left" Margin="10,287,0,0" VerticalAlignment="Top" Width="144" Height="31" Click="Button_Click" Background="#FFE60000" Foreground="White" ForceCursor="True"/>
                             <Button x:Name="savestudentButton" Content="Update student" HorizontalAlignment="Left" Margin="262,287,0,0" VerticalAlignment="Top" Width="167" Height="31" Background="#FF1976D3" Foreground="White" Click="Button_Click"/>
-                            <ComboBox x:Name="studentComboC" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="311" SelectedIndex="0">
+                            <ComboBox x:Name="studentComboC" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="311" SelectedIndex="0" DropDownClosed="studentComboC_Changed">
                                 <ComboBoxItem Content="SELECT STUDENT"/>
                             </ComboBox>
                             <Button x:Name="studentButtonC" Content="Select" HorizontalAlignment="Left" Margin="326,10,0,0" VerticalAlignment="Top" Width="103" Height="27" Click="Button_Click"/>
