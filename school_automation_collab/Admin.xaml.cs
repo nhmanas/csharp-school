@@ -369,21 +369,30 @@ namespace School_Automation_Collab
         {
             if (studentComboC.SelectedIndex!=0)
             {
-                studentnameBox.Text = studentList.Rows[studentComboC.SelectedIndex - 1]["name"].ToString();
-                studentsurnameBox.Text = studentList.Rows[studentComboC.SelectedIndex - 1]["surname"].ToString();
-                idnumberBox.Text = studentList.Rows[studentComboC.SelectedIndex - 1]["user_id"].ToString();
-                yearBox.Text = studentList.Rows[studentComboC.SelectedIndex - 1]["year"].ToString();
-                studentfacultyComboC.SelectedIndex= studentList.Rows[studentComboC.SelectedIndex - 1]["faculty_id"].ToString()==""?0: (int)studentList.Rows[studentComboC.SelectedIndex - 1]["faculty_id"];
-                studentfacultyComboC_changed(new object(), new EventArgs());
-                var index = 0;
-                for (int i = 1; i < studentdepartmentComboC.Items.Count; i++)
+                int index = 0;
+                for (int i = 1; i < studentList.Rows.Count; i++)
                 {
-                    if ((int)studentList.Rows[studentComboC.SelectedIndex - 1]["department_id"]==(int)(studentdepartmentComboC.Items[i] as ComboboxItem).Value)
+                    if (studentList.Rows[i]["number"].ToString()==(studentComboC.SelectedItem as ComboboxItem).Value.ToString())
                     {
                         index = i;
+                        break;
                     }
                 }
-                studentdepartmentComboC.SelectedIndex = index;
+                studentnameBox.Text = studentList.Rows[index]["name"].ToString();
+                studentsurnameBox.Text = studentList.Rows[index]["surname"].ToString();
+                idnumberBox.Text = studentList.Rows[index]["user_id"].ToString();
+                yearBox.Text = studentList.Rows[index]["year"].ToString();
+                studentfacultyComboC.SelectedIndex= studentList.Rows[index]["faculty_id"].ToString()==""?0: (int)studentList.Rows[index]["faculty_id"];
+                studentfacultyComboC_changed(new object(), new EventArgs());
+                var index2 = 0;
+                for (int i = 1; i < studentdepartmentComboC.Items.Count; i++)
+                {
+                    if ((int)studentList.Rows[index]["department_id"]==(int)(studentdepartmentComboC.Items[i] as ComboboxItem).Value)
+                    {
+                        index2 = i;
+                    }
+                }
+                studentdepartmentComboC.SelectedIndex = index2;
             }
             else
             {
@@ -545,7 +554,7 @@ namespace School_Automation_Collab
             for (int i = 0; i < studentList.Rows.Count; i++)
             {
                 ComboboxItem item = new ComboboxItem();
-                item.Text = studentList.Rows[i]["name"].ToString();
+                item.Text = studentList.Rows[i]["number"].ToString();
                 item.Value = studentList.Rows[i]["number"];
                 studentComboC.Items.Add(item);
             }
@@ -571,7 +580,7 @@ namespace School_Automation_Collab
                 {
 
                     ComboboxItem item = new ComboboxItem();
-                    item.Text = studentList.Rows[i]["name"].ToString();
+                    item.Text = studentList.Rows[i]["number"].ToString();
                     item.Value = studentList.Rows[i]["number"];
                     studentComboC.Items.Add(item);
                 }
@@ -685,25 +694,29 @@ namespace School_Automation_Collab
                 new WarningWindow(MainWindow.colorError, "DB error", "Couldnt update user").Show();
                 return;
             }
-            query = "SELECT * FROM students join access on access.user_id=students.number";
-            check = Database.query(query);
-            if (check == null)
+
+            if (!student_comboboxes_update())
             {
-                new WarningWindow(MainWindow.colorError, "DB error", "Couldnt update current session").Show();
                 return;
             }
-            studentList = check;
-            student_comboboxes_update();
 
 
             new WarningWindow(MainWindow.colorOK, "Success", "Successfully updated student").Show();
 
         }
-        private void student_comboboxes_update()
+        private bool student_comboboxes_update()
         {
+            var  query = "SELECT * FROM students join access on access.user_id=students.number";
+            var check = Database.query(query);
+            if (check == null)
+            {
+                new WarningWindow(MainWindow.colorError, "DB error", "Couldnt update current session").Show();
+                return false;
+            }
+            studentList = check;
             studentCombo.SelectedIndex = 0;
             studentComboC.SelectedIndex = 0;
-            n = studentComboC.Items.Count - 1;
+            var n = studentComboC.Items.Count - 1;
             var m = studentCombo.Items.Count - 1;
             for (int i = 0; i < n; i++)
             {
@@ -731,6 +744,7 @@ namespace School_Automation_Collab
                 }
             }
             studentComboC.SelectedIndex = index;
+            return true;
         }
 
         private void delete_student(object sender, RoutedEventArgs e)
@@ -740,7 +754,28 @@ namespace School_Automation_Collab
                 new WarningWindow(MainWindow.colorWarning, "Cant delete", "You must select a student first").Show();
                 return;
             }
+            var query = @"
+                    delete from access where access.user_id=@id;
+                    delete from notes where notes.student_id=@id;
+                    delete from students where students.number=@id";
+            var lstParams = new List<cmdParameterType> { new cmdParameterType("@id", (studentComboC.SelectedItem as ComboboxItem).Value) };
+            var check = Database.query(query, lstParams);
+            if (check==null)
+            {
+                new WarningWindow(MainWindow.colorError, "DB error", "Couldnt delete student").Show();
+                return;
+            }
 
+
+
+
+
+            if (!student_comboboxes_update())
+            {
+                return;
+            }
+
+            new WarningWindow(MainWindow.colorOK, "Success", "Successfully deleted student").Show();
         }
     }
     public class ComboboxItem
