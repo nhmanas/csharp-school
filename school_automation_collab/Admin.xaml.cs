@@ -385,7 +385,7 @@ namespace School_Automation_Collab
             }
             instructornameLabel.Content = check.Rows[0]["instructor_name"].ToString();
             classcodeLabel.Content = check.Rows[0]["code"].ToString();
-            availablehoursLabel.Content = check.Rows[0]["start_end"].ToString();
+            availablehoursLabel.Content = check.Rows[0]["start_end"].ToString()=="1"?"9:00-12:00":"13:00-16:00";
             availabledayLabel.Content = check.Rows[0]["day"].ToString();
         }
     }
