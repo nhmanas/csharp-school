@@ -102,12 +102,12 @@
                                 </FlowDocument>
                             </RichTextBox>
                             <Label Content="Notes: " HorizontalAlignment="Left" Margin="75,267,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.467,3.129"/>
-                            <Button x:Name="updateclassButton" Content="Update class" HorizontalAlignment="Left" Margin="322,461,0,0" VerticalAlignment="Top" Background="#FF1976D3" Foreground="White" Width="136" Height="31" Click="Button_Click" TabIndex="12"/>
+                            <Button x:Name="updateclassButton" Content="Update class" HorizontalAlignment="Left" Margin="322,461,0,0" VerticalAlignment="Top" Background="#FF1976D3" Foreground="White" Width="136" Height="31" Click="update_class" TabIndex="12"/>
                             <Label Content="Instructor name: " HorizontalAlignment="Left" Margin="6,38,0,0" VerticalAlignment="Top"/>
                             <Button x:Name="deleteclassButtonC" Content="DELETE THIS CLASS" HorizontalAlignment="Left" Margin="10,461,0,0" VerticalAlignment="Top" Width="149" Height="31" Click="delete_class" Background="#FFE60000" Foreground="White" ForceCursor="True" TabIndex="14"/>
-                            <TextBox x:Name="classcodeBox" HorizontalAlignment="Left" Height="27" Margin="140,73,0,0" TextWrapping="Wrap" Text="classcodeBox" VerticalAlignment="Top" Width="318" TabIndex="7"/>
+                            <TextBox x:Name="classcodeBox" HorizontalAlignment="Left" Height="27" Margin="140,73,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="318" TabIndex="7"/>
                             <Label Content="Course name:" HorizontalAlignment="Left" Margin="24,7,0,0" VerticalAlignment="Top"/>
-                            <TextBox x:Name="coursenameBox" HorizontalAlignment="Left" Height="27" Margin="140,11,0,0" TextWrapping="Wrap" Text="coursenameBox" VerticalAlignment="Top" Width="318" TabIndex="5"/>
+                            <TextBox x:Name="coursenameBox" HorizontalAlignment="Left" Height="27" Margin="140,11,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="318" TabIndex="5"/>
                             <ComboBox x:Name="hoursCombo" HorizontalAlignment="Left" Margin="140,102,0,0" VerticalAlignment="Top" Width="318" SelectedIndex="0" TabIndex="8">
                                 <ComboBoxItem Content="09:00 - 12:00"/>
                                 <ComboBoxItem Content="13:00 - 16:00"/>
@@ -115,7 +115,7 @@
                             <ComboBox x:Name="instructornameCombo" HorizontalAlignment="Left" Margin="140,42,0,0" VerticalAlignment="Top" Width="318" SelectedIndex="0" TabIndex="6">
                                 <ComboBoxItem Content="Select Instructor"/>
                             </ComboBox>
-                            <Button x:Name="addclassButton" Content="Add Class" HorizontalAlignment="Left" Margin="178,461,0,0" VerticalAlignment="Top" Background="#FF1976D3" Foreground="White" Width="124" Height="31" Click="Button_Click" TabIndex="13"/>
+                            <Button x:Name="addclassButton" Content="Add Class" HorizontalAlignment="Left" Margin="178,461,0,0" VerticalAlignment="Top" Background="#FF1976D3" Foreground="White" Width="124" Height="31" Click="add_class" TabIndex="13"/>
                             <Label Content="Available hours: " HorizontalAlignment="Left" Margin="10,132,0,0" VerticalAlignment="Top"/>
                             <ComboBox x:Name="daysCombo" HorizontalAlignment="Left" Margin="140,134,0,0" VerticalAlignment="Top" Width="318" SelectedIndex="0" TabIndex="8">
                                 <ComboBoxItem Content="monday"/>

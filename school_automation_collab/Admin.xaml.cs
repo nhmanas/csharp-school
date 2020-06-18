@@ -123,6 +123,61 @@ namespace School_Automation_Collab
             
 
         }
+        private bool update_faculty_department_course()
+        {
+            var query = "select * from faculties";
+            var check = Database.query(query);
+            if (check == null)
+            {
+                new WarningWindow(MainWindow.colorError, "DB Error", "Couldn't select faculties").Show();
+                return false;
+            }
+            facultyList = check;
+            facultyCombo.SelectedIndex = 0;
+            facultyCombo_changed(new object(), new EventArgs());
+            facultyComboC.SelectedIndex = 0;
+            facultyComboC_changed(new object(), new EventArgs());
+            studentfacultyComboC.SelectedIndex = 0;
+            studentfacultyComboC_changed(new object(), new EventArgs());
+
+            int m = facultyCombo.Items.Count;
+            for (int i = 1; i < m; i++)
+            {
+                facultyCombo.Items.Remove(facultyCombo.Items[1]);
+                facultyComboC.Items.Remove(facultyComboC.Items[1]);
+            }
+
+
+            for (int i = 0; i < facultyList.Rows.Count; i++)
+            {
+                ComboboxItem item = new ComboboxItem();
+                item.Text = facultyList.Rows[i]["name"].ToString();
+                item.Value = facultyList.Rows[i]["id"];
+                facultyCombo.Items.Add(item);
+                facultyComboC.Items.Add(item);
+            }
+            
+
+
+            query = "select * from departments";
+            check = Database.query(query);
+            if (check == null)
+            {
+                new WarningWindow(MainWindow.colorError, "DB Error", "Couldn't select departments").Show();
+                return false;
+            }
+            departmentList = check;
+
+            query = "select * from courses";
+            check = Database.query(query);
+            if (check == null)
+            {
+                new WarningWindow(MainWindow.colorError, "DB Error", "Couldn't select courses").Show();
+                return false;
+            }
+            courseList = check;
+            return true;
+        }
 
 
 
@@ -161,6 +216,11 @@ namespace School_Automation_Collab
         private void enroll_Click(object sender, RoutedEventArgs e)
         {
             course_info_Click(sender, e);
+            if (availabledayLabel.Content.ToString() == "Needs teacher assignment")
+            {
+                new WarningWindow(MainWindow.colorWarning, "Cant enroll", "Specified class has no teacher").Show();
+                return;
+            }
             if (studentCombo.SelectedIndex==0 || courseCombo.SelectedIndex==0 || departmentCombo.SelectedIndex==0 || facultyCombo.SelectedIndex==0)
             {
                 new WarningWindow(MainWindow.colorWarning,"Wrong Selection", "Select Faculty, Department, Course \nand Student").Show();
@@ -473,6 +533,11 @@ namespace School_Automation_Collab
 
         private void course_info_Click(object sender, RoutedEventArgs e)
         {
+            if (courseCombo.SelectedIndex == 0)
+            {
+                new WarningWindow(MainWindow.colorWarning, "Can't update", "Please select course first").Show();
+                return;
+            }
             var faculty_id      = (facultyCombo.SelectedItem as ComboboxItem).Value.ToString();
             var department_id   = (departmentCombo.SelectedItem as ComboboxItem).Value.ToString();
             var course_id       = (courseCombo.SelectedItem as ComboboxItem).Value.ToString();
@@ -483,6 +548,15 @@ namespace School_Automation_Collab
             if (check==null)
             {
                 new WarningWindow(MainWindow.colorError, "DB error", "Connection error").Show();
+                return;
+            }
+            if (check.Rows.Count==0)
+            {
+                instructornameLabel.Content = "Needs teacher assignment";
+                classcodeLabel.Content = "Needs teacher assignment";
+                availablehoursLabel.Content = "Needs teacher assignment";
+                availabledayLabel.Content = "Needs teacher assignment";
+                
                 return;
             }
             instructornameLabel.Content = check.Rows[0]["instructor_name"].ToString();
@@ -518,8 +592,8 @@ namespace School_Automation_Collab
             for (int i = 0; i < teacherListApproved.Rows.Count; i++)
             {
                     ComboboxItem item = new ComboboxItem();
-                    item.Text = teacherListApproved.Rows[i]["name"].ToString();
-                    item.Value = teacherListApproved.Rows[i]["number"];
+                    item.Text = teacherListApproved.Rows[i]["number"].ToString();
+                    item.Value = teacherListApproved.Rows[i]["id"];
                     instructornameCombo.Items.Add(item);
             }
             return true;
@@ -777,9 +851,14 @@ namespace School_Automation_Collab
 
             new WarningWindow(MainWindow.colorOK, "Success", "Successfully deleted student").Show();
         }
-
+        string classCode = "";
         private void classInfo_click(object sender, RoutedEventArgs e)
         {
+            if (courseComboC.SelectedIndex==0)
+            {
+                new WarningWindow(MainWindow.colorWarning, "Can't update", "Please select course first").Show();
+                return;
+            }
             var query = "select courses.*, instructors.number from courses join instructors on instructors.id = courses.instructor_id where courses.id=@id";
             var lstParams = new List<cmdParameterType> {
                 new cmdParameterType("@id",(courseComboC.SelectedItem as ComboboxItem).Value)
@@ -807,8 +886,8 @@ namespace School_Automation_Collab
                 for (int i = 1; i < instructornameCombo.Items.Count; i++)
                 {
                     var a = (instructornameCombo.Items[i] as ComboboxItem).Value.ToString();
-                    var b = check.Rows[0]["number"].ToString();
-                    if ((instructornameCombo.Items[i] as ComboboxItem).Value.ToString()==check.Rows[0]["number"].ToString())
+                    var b = check.Rows[0]["instructor_id"].ToString();
+                    if ((instructornameCombo.Items[i] as ComboboxItem).Value.ToString()==check.Rows[0]["instructor_id"].ToString())
                     {
                         instructornameCombo.SelectedIndex = i;
                         break;
@@ -818,6 +897,7 @@ namespace School_Automation_Collab
             }
             coursenameBox.Text = check.Rows[0]["name"].ToString();
             classcodeBox.Text = check.Rows[0]["code"].ToString();
+            this.classCode= check.Rows[0]["code"].ToString();
             hoursCombo.SelectedIndex = (int)check.Rows[0]["start_end"];
 
             
@@ -840,7 +920,7 @@ namespace School_Automation_Collab
         {
             if (courseComboC.SelectedIndex==0)
             {
-                new WarningWindow(MainWindow.colorWarning, "Can't delete", "Please select course first", new MainWindow()).Show();
+                new WarningWindow(MainWindow.colorWarning, "Can't delete", "Please select course first").Show();
                 return;
             }
             var query =
@@ -856,7 +936,165 @@ namespace School_Automation_Collab
                 new WarningWindow(MainWindow.colorError, "DB error", "Couldnt delete course").Show();
                 return;
             }
-            new WarningWindow(MainWindow.colorOK, "Success", "Successfully deleted class and associated students' notes").Show();
+            if (!update_faculty_department_course())
+            {
+                return;
+            }
+            new WarningWindow(MainWindow.colorOK, "Success", "Successfully deleted class \nand associated students' notes").Show();
+
+        }
+
+        private void update_class(object sender, RoutedEventArgs e)
+        {
+            var query = "";
+            var lstParams = new List<cmdParameterType>();
+            var check = new DataTable();
+            if (courseComboC.SelectedIndex == 0)
+            {
+                new WarningWindow(MainWindow.colorWarning, "Can't update", "Please select course first").Show();
+                return;
+            }
+
+            if (
+                coursenameBox.Text=="" ||
+                instructornameCombo.SelectedIndex==0 ||
+                classcodeBox.Text==""
+                )
+            {
+                new WarningWindow(MainWindow.colorWarning, "Can't update", "Please fill neccessary places").Show();
+                return;
+            }
+            if (this.classCode!= classcodeBox.Text.ToUpper())
+            {
+                query = "select * from courses where code=@code";
+                lstParams = new List<cmdParameterType>
+                    {
+                        new cmdParameterType("@code",classcodeBox.Text.ToUpper())
+                    };
+                check = Database.query(query, lstParams);
+                if (check == null)
+                {
+                    new WarningWindow(MainWindow.colorError, "DB error", "Couldnt delete course").Show();
+                    return;
+                }
+                if (check.Rows.Count != 0)
+                {
+                    new WarningWindow(MainWindow.colorWarning, "Can't update", "There is already a class with same code").Show();
+                    return;
+                }
+            }
+            
+
+            query = "select * from courses where instructor_id=@instructor_id and start_end=@start_end and day=@day";
+            lstParams = new List<cmdParameterType>
+            {
+                new cmdParameterType("@instructor_id",(instructornameCombo.SelectedItem as ComboboxItem).Value),
+                new cmdParameterType("@start_end",hoursCombo.SelectedIndex+1),
+                new cmdParameterType("@day",(daysCombo.Items[daysCombo.SelectedIndex] as ComboBoxItem).Content)
+            };
+            check = Database.query(query, lstParams);
+            if (check == null)
+            {
+                new WarningWindow(MainWindow.colorError, "DB error", "Couldnt delete course").Show();
+                return;
+            }
+            if (check.Rows.Count!=0)
+            {
+                new WarningWindow(MainWindow.colorWarning, "Can't update", "Teacher has a class at that time of the day").Show();
+                return;
+            }
+            query = @"update courses 
+                    set 
+                    name=@name, instructor_id=@instructor_id, code=@code,  start_end=@start_end, day=@day where id=@id";
+            lstParams.Add(new cmdParameterType("@code", classcodeBox.Text.ToUpper()));
+            lstParams.Add(new cmdParameterType("@name", coursenameBox.Text));
+            lstParams.Add(new cmdParameterType("@id", (courseComboC.SelectedItem as ComboboxItem).Value));
+            check = Database.query(query, lstParams);
+            if (check == null)
+            {
+                new WarningWindow(MainWindow.colorError, "DB error", "Couldnt update course").Show();
+                return;
+            }
+            if (!update_faculty_department_course())
+            {
+                return;
+            }
+            new WarningWindow(MainWindow.colorOK, "Success", "Successfully updated").Show();
+
+        }
+
+        private void add_class(object sender, RoutedEventArgs e)
+        {
+            if (departmentComboC.SelectedIndex==0)
+            {
+                new WarningWindow(MainWindow.colorWarning, "Can't Add", "Please select department first").Show();
+                return;
+            }
+            if (
+                coursenameBox.Text == "" ||
+                instructornameCombo.SelectedIndex == 0 ||
+                classcodeBox.Text == ""
+                )
+            {
+                new WarningWindow(MainWindow.colorWarning, "Can't Add", "Please fill neccessary places").Show();
+                return;
+            }
+            var query = "select * from courses where instructor_id=@instructor_id and start_end=@start_end and day=@day";
+            var lstParams = new List<cmdParameterType>
+            {
+                new cmdParameterType("@instructor_id",(instructornameCombo.SelectedItem as ComboboxItem).Value),
+                new cmdParameterType("@start_end",hoursCombo.SelectedIndex+1),
+                new cmdParameterType("@day",(daysCombo.Items[daysCombo.SelectedIndex] as ComboBoxItem).Content)
+            };
+            var check = Database.query(query, lstParams);
+            if (check == null)
+            {
+                new WarningWindow(MainWindow.colorError, "DB error", "Couldnt delete course").Show();
+                return;
+            }
+            if (check.Rows.Count != 0)
+            {
+                new WarningWindow(MainWindow.colorWarning, "Can't Add", "Teacher has a class at that time of the day").Show();
+                return;
+            }
+            query = "select * from courses where code=@code";
+            lstParams = new List<cmdParameterType>
+                    {
+                        new cmdParameterType("@code",classcodeBox.Text.ToUpper())
+                    };
+            check = Database.query(query, lstParams);
+            if (check == null)
+            {
+                new WarningWindow(MainWindow.colorError, "DB error", "Couldnt check existing course").Show();
+                return;
+            }
+            if (check.Rows.Count != 0)
+            {
+                new WarningWindow(MainWindow.colorWarning, "Can't Add", "There is already a class with same code").Show();
+                return;
+            }
+            query = @"INSERT INTO `courses`(`code`, `name`, `instructor_id`, `department_id`, `start_end`, `day`) VALUES 
+                    (@code,@name,@instructor_id,@department_id,@start_end,@day)";
+            lstParams = new List<cmdParameterType>
+            {
+                new cmdParameterType("@code",classcodeBox.Text.ToUpper()),
+                new cmdParameterType("@instructor_id",(instructornameCombo.SelectedItem as ComboboxItem).Value),
+                new cmdParameterType("@department_id",(departmentComboC.SelectedItem as ComboboxItem).Value),
+                new cmdParameterType("@start_end",hoursCombo.SelectedIndex+1),
+                new cmdParameterType("@day",(daysCombo.SelectedItem as ComboBoxItem).Content),
+                new cmdParameterType("@name",coursenameBox.Text)
+            };
+            check = Database.query(query, lstParams);
+            if (check == null)
+            {
+                new WarningWindow(MainWindow.colorError, "DB error", "Couldnt insert course").Show();
+                return;
+            }
+            if (!update_faculty_department_course())
+            {
+                return;
+            }
+            new WarningWindow(MainWindow.colorOK, "Success", "Successfully added class").Show();
 
         }
     }
