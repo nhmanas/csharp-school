@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: localhost:3306
--- Üretim Zamanı: 17 Haz 2020, 11:10:54
+-- Üretim Zamanı: 18 Haz 2020, 13:34:44
 -- Sunucu sürümü: 10.2.31-MariaDB-cll-lve
 -- PHP Sürümü: 7.3.6
 
@@ -35,6 +35,8 @@ CREATE TABLE `access` (
   `user_id` int(12) NOT NULL,
   `pass` varchar(300) NOT NULL,
   `type` varchar(12) NOT NULL,
+  `faculty_id` int(11) NOT NULL,
+  `department_id` int(12) NOT NULL,
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -49,7 +51,7 @@ CREATE TABLE `assistans` (
   `number` varchar(50) NOT NULL,
   `status` int(11) NOT NULL DEFAULT 0,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -214,7 +216,7 @@ CREATE TABLE `instructors` (
   `number` varchar(50) NOT NULL,
   `status` int(11) NOT NULL DEFAULT 0,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -255,11 +257,10 @@ CREATE TABLE `notes` (
   `id` int(12) NOT NULL,
   `period` varchar(50) NOT NULL,
   `course_id` int(12) NOT NULL,
-  `percentage` varchar(10) NOT NULL,
   `student_id` int(12) NOT NULL,
-  `type` varchar(40) NOT NULL,
-  `note` varchar(40) NOT NULL,
-  `date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `note1` varchar(50) NOT NULL,
+  `note2` varchar(50) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -271,11 +272,9 @@ CREATE TABLE `notes` (
 CREATE TABLE `students` (
   `id` int(12) NOT NULL,
   `number` varchar(50) NOT NULL,
-  `faculty_id` int(12) NOT NULL,
-  `department_id` int(12) NOT NULL,
   `year` varchar(40) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
