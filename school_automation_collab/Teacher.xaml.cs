@@ -27,14 +27,38 @@ namespace School_Automation_Collab
         {
             InitializeComponent();
         }
-        public Teacher(string name,string surname,string id)
+        public Teacher(string name,string surname,string id,string faculty,string department)
         {
             InitializeComponent();
             nameLabel.Content = name;
             surnameLabel.Content = surname;
             idnumberLabel.Content = id;
+            var query = "";
+            DataRow departmentName;
 
-            var query = "select * from courses where instructor_id=@id";
+            if (department == "")
+            {
+                departmentLabel.Content = "Department is unassigned";
+            }
+            else
+            {
+                query = $"select * from departments where id={department}";
+                departmentName = Database.query(query, new List<cmdParameterType>()).Rows[0];
+                departmentLabel.Content = departmentName["name"];
+
+            }
+            if (faculty == "")
+            {
+                facultyLabel.Content = "Faculty is unassigned";
+            }
+            else
+            {
+                query = $"select * from faculties where id={faculty}";
+                var facultyName = Database.query(query, new List<cmdParameterType>()).Rows[0];
+                facultyLabel.Content = facultyName["name"];
+            }
+
+            query = "select * from courses where instructor_id=@id";
             var lstParams = new List<cmdParameterType> { new cmdParameterType("@id", id) };
             var check = Database.query(query, lstParams);
             if (check==null)

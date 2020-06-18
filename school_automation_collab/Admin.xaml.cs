@@ -146,11 +146,80 @@ namespace School_Automation_Collab
 
         private void enroll_Click(object sender, RoutedEventArgs e)
         {
+            course_info_Click(sender, e);
             if (studentCombo.SelectedIndex==0 || courseCombo.SelectedIndex==0 || departmentCombo.SelectedIndex==0 || facultyCombo.SelectedIndex==0)
             {
                 new WarningWindow(MainWindow.colorWarning,"Wrong Selection", "Select Faculty, Department, Course \nand Student").Show();
                 return;
             }
+            var query = "select * from notes join courses on notes.course_id = courses.id where student_id = @student_id";
+            var lstParams = new List<cmdParameterType> { new cmdParameterType("@student_id", idnumberLabel1.Content) };
+            var check = Database.query(query, lstParams);
+            if (check == null)
+            {
+                new WarningWindow(MainWindow.colorError, "DB Error", "Updating error").Show();
+                return;
+            }
+            if (check.Rows.Count==0)
+            {
+                query = "insert into notes (course_id,student_id) values (@course_id,@student_id)";
+                lstParams.Add(new cmdParameterType("@course_id", (courseCombo.SelectedItem as ComboboxItem).Value.ToString()));
+                var check2 = Database.query(query, lstParams);
+                if (check2 == null)
+                {
+                    new WarningWindow(MainWindow.colorError, "DB Error", "Updating error").Show();
+                    return;
+                }
+                
+            }
+            else
+            {
+                query = "select * from courses where id="+(courseCombo.SelectedItem as ComboboxItem).Value.ToString();
+                var check2 = Database.query(query);
+                if (check2 == null)
+                {
+                    new WarningWindow(MainWindow.colorError, "DB Error", "Updating error").Show();
+                    return;
+                }
+                var course = check2.Rows[0];
+                query = "select * from notes join courses on notes.course_id = courses.id where student_id = @student_id and courses.day=@day and courses.start_end=@start_end";
+                lstParams = new List<cmdParameterType>
+                {
+                    new cmdParameterType("@day", course["day"].ToString()),
+                    new cmdParameterType("@student_id",idnumberLabel1.Content),
+                     new cmdParameterType("@start_end",course["start_end"].ToString())
+
+                };
+                check2 = Database.query(query, lstParams);
+                if (check2 == null)
+                {
+                    new WarningWindow(MainWindow.colorError, "DB Error", "Couldnt check student's existing classes").Show();
+                    return;
+                }
+                if (check2.Rows.Count!=0)
+                {
+                    new WarningWindow(MainWindow.colorWarning, "Can't add", "Student already has a class that day and time").Show();
+                    return;
+                }
+                else
+                {
+                    query = "insert into notes (course_id,student_id) values (@course_id,@student_id)";
+                    lstParams = new List<cmdParameterType>
+                    {
+                        new cmdParameterType("@course_id",(courseCombo.SelectedItem as ComboboxItem).Value.ToString()),
+                        new cmdParameterType("@student_id",idnumberLabel1.Content)
+                    };
+                    check2=Database.query(query, lstParams);
+                    if (check2 == null)
+                    {
+                        new WarningWindow(MainWindow.colorError, "DB Error", "Couldnt insert to notes db").Show();
+                        return;
+                    }
+                }
+            }
+            new WarningWindow(MainWindow.colorOK, "Success", "Successfully enrolled student to selected class").Show();
+            return;
+
         }
 
         private void facultyCombo_changed(object sender, EventArgs e)
@@ -300,6 +369,25 @@ namespace School_Automation_Collab
             return true;
         }
 
+        private void course_info_Click(object sender, RoutedEventArgs e)
+        {
+            var faculty_id      = (facultyCombo.SelectedItem as ComboboxItem).Value.ToString();
+            var department_id   = (departmentCombo.SelectedItem as ComboboxItem).Value.ToString();
+            var course_id       = (courseCombo.SelectedItem as ComboboxItem).Value.ToString();
+
+            var query = "select courses.*, access.name as 'instructor_name' from courses join instructors on courses.instructor_id = instructors.id join access on access.user_id=instructors.number where courses.id=@course_id";
+            var lstParams = new List<cmdParameterType> { new cmdParameterType("@course_id", course_id) };
+            var check = Database.query(query, lstParams);
+            if (check==null)
+            {
+                new WarningWindow(MainWindow.colorError, "DB error", "Connection error").Show();
+                return;
+            }
+            instructornameLabel.Content = check.Rows[0]["instructor_name"].ToString();
+            classcodeLabel.Content = check.Rows[0]["code"].ToString();
+            availablehoursLabel.Content = check.Rows[0]["start_end"].ToString();
+            availabledayLabel.Content = check.Rows[0]["day"].ToString();
+        }
     }
     public class ComboboxItem
     {

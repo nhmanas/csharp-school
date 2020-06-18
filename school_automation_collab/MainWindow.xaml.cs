@@ -241,15 +241,18 @@ namespace School_Automation_Collab
                 messageHandle(colorOK, "Logging in...");
                 //Student(string name, string surname, int id, string faculty, string department, int year)
                 var students = check2.Rows[0];
-                
-                
+
+
+
+                //query = "select access.*, departments.name as 'department_name', faculties.name as 'faculty_name' from access join departments on departments.id=access.department_id join faculties on faculties.id=access.faculty_id where user_id=@user_id and pass=@pass";
+                //check = Database.query(query);
                 new WarningWindow(colorOK, "OK", "Log in successfull",
                     new Student(
                         access["name"].ToString(),
                         access["surname"].ToString(),
                         (int)access["user_id"],
-                        (int)students["faculty_id"],
-                        (int)students["department_id"],
+                        access["faculty_id"].ToString(),
+                        access["department_id"].ToString(),
                         students["year"].ToString()
                         )
                     ).Show();
@@ -285,9 +288,11 @@ namespace School_Automation_Collab
 
                 new WarningWindow(colorOK, "OK", "Log in successfull", 
                     new Teacher(
-                        access["name"].ToString()
-                        ,access["surname"].ToString(),
-                        access["user_id"].ToString()
+                        access["name"].ToString(),
+                        access["surname"].ToString(),
+                        access["user_id"].ToString(),
+                        access["faculty_id"].ToString(),
+                        access["department_id"].ToString()
                         )
                     ).Show();
                 this.Close();
@@ -366,7 +371,7 @@ namespace School_Automation_Collab
             }
             if (authLevelCombo_signup.SelectedIndex==0) //if student
             {
-                query = $"insert into students (number,faculty_id,department_id,year,updated_at) values (@user_id,1,1,{DateTime.Now.Year},current_timestamp())";
+                query = $"insert into students (number,year,updated_at) values (@user_id,{DateTime.Now.Year},current_timestamp())";
                 check = Database.query(query, lstParams);
                 if (check==null)
                 {
