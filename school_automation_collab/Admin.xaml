@@ -103,13 +103,9 @@
                             </RichTextBox>
                             <Label Content="Notes: " HorizontalAlignment="Left" Margin="75,267,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.467,3.129"/>
                             <Button x:Name="updateclassButton" Content="Update class" HorizontalAlignment="Left" Margin="322,461,0,0" VerticalAlignment="Top" Background="#FF1976D3" Foreground="White" Width="136" Height="31" Click="Button_Click" TabIndex="12"/>
-                            <Label Content="Credits: " HorizontalAlignment="Left" Margin="68,131,0,0" VerticalAlignment="Top"/>
-                            <Label Content="ECTS: " HorizontalAlignment="Left" Margin="83,162,0,0" VerticalAlignment="Top"/>
                             <Label Content="Instructor name: " HorizontalAlignment="Left" Margin="6,38,0,0" VerticalAlignment="Top"/>
-                            <Button x:Name="deleteclassButtonC" Content="DELETE THIS CLASS" HorizontalAlignment="Left" Margin="10,461,0,0" VerticalAlignment="Top" Width="149" Height="31" Click="Button_Click" Background="#FFE60000" Foreground="White" ForceCursor="True" TabIndex="14"/>
+                            <Button x:Name="deleteclassButtonC" Content="DELETE THIS CLASS" HorizontalAlignment="Left" Margin="10,461,0,0" VerticalAlignment="Top" Width="149" Height="31" Click="delete_class" Background="#FFE60000" Foreground="White" ForceCursor="True" TabIndex="14"/>
                             <TextBox x:Name="classcodeBox" HorizontalAlignment="Left" Height="27" Margin="140,73,0,0" TextWrapping="Wrap" Text="classcodeBox" VerticalAlignment="Top" Width="318" TabIndex="7"/>
-                            <TextBox x:Name="creditsBox" HorizontalAlignment="Left" Height="27" Margin="140,135,0,0" TextWrapping="Wrap" Text="creditsBox" VerticalAlignment="Top" Width="318" TabIndex="9"/>
-                            <TextBox x:Name="ectsBox" HorizontalAlignment="Left" Height="27" Margin="140,166,0,0" TextWrapping="Wrap" Text="ectsBox" VerticalAlignment="Top" Width="318" TabIndex="10"/>
                             <Label Content="Course name:" HorizontalAlignment="Left" Margin="24,7,0,0" VerticalAlignment="Top"/>
                             <TextBox x:Name="coursenameBox" HorizontalAlignment="Left" Height="27" Margin="140,11,0,0" TextWrapping="Wrap" Text="coursenameBox" VerticalAlignment="Top" Width="318" TabIndex="5"/>
                             <ComboBox x:Name="hoursCombo" HorizontalAlignment="Left" Margin="140,102,0,0" VerticalAlignment="Top" Width="318" SelectedIndex="0" TabIndex="8">
@@ -117,9 +113,17 @@
                                 <ComboBoxItem Content="13:00 - 16:00"/>
                             </ComboBox>
                             <ComboBox x:Name="instructornameCombo" HorizontalAlignment="Left" Margin="140,42,0,0" VerticalAlignment="Top" Width="318" SelectedIndex="0" TabIndex="6">
-                                <ComboBoxItem Content="instructornameCombo"/>
+                                <ComboBoxItem Content="Select Instructor"/>
                             </ComboBox>
                             <Button x:Name="addclassButton" Content="Add Class" HorizontalAlignment="Left" Margin="178,461,0,0" VerticalAlignment="Top" Background="#FF1976D3" Foreground="White" Width="124" Height="31" Click="Button_Click" TabIndex="13"/>
+                            <Label Content="Available hours: " HorizontalAlignment="Left" Margin="10,132,0,0" VerticalAlignment="Top"/>
+                            <ComboBox x:Name="daysCombo" HorizontalAlignment="Left" Margin="140,134,0,0" VerticalAlignment="Top" Width="318" SelectedIndex="0" TabIndex="8">
+                                <ComboBoxItem Content="monday"/>
+                                <ComboBoxItem Content="tuesday"/>
+                                <ComboBoxItem Content="wednesday"/>
+                                <ComboBoxItem Content="thursday"/>
+                                <ComboBoxItem Content="friday"/>
+                            </ComboBox>
                         </Grid>
                     </GroupBox>
                     <GroupBox Header="Course selection" HorizontalAlignment="Left" Height="169" Margin="10,10,0,0" VerticalAlignment="Top" Width="451" Grid.RowSpan="2">
@@ -133,7 +137,7 @@
                             <ComboBox x:Name="courseComboC" HorizontalAlignment="Left" Margin="10,74,0,0" VerticalAlignment="Top" Width="311" SelectedIndex="0" TabIndex="3">
                                 <ComboBoxItem Content="SELECT COURSE"/>
                             </ComboBox>
-                            <Button x:Name="courseButtonC" Content="Select" HorizontalAlignment="Left" Margin="326,74,0,0" VerticalAlignment="Top" Width="103" Height="27" Click="Button_Click" TabIndex="4"/>
+                            <Button x:Name="courseButtonC" Content="View Info" HorizontalAlignment="Left" Margin="326,74,0,0" VerticalAlignment="Top" Width="103" Height="27" Click="classInfo_click" TabIndex="4"/>
                         </Grid>
                     </GroupBox>
                     <GroupBox Header="Student selection" HorizontalAlignment="Left" Height="356" Margin="10,26,0,0" VerticalAlignment="Top" Width="451" Grid.Row="1">
@@ -168,7 +172,11 @@
             </TabItem>
             <TabItem Header="Approve teacher accounts">
                 <Grid Background="#FFFFFFFF">
-                    <GroupBox Header="Teacher information" HorizontalAlignment="Left" Height="267" Margin="10,42,0,0" VerticalAlignment="Top" Width="936">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="305*"/>
+                        <ColumnDefinition Width="651*"/>
+                    </Grid.ColumnDefinitions>
+                    <GroupBox Header="Teacher information" HorizontalAlignment="Left" Height="267" Margin="10,42,0,0" VerticalAlignment="Top" Width="936" Grid.ColumnSpan="2">
                         <Grid Background="#FFFFFFFF">
                             <Label Content="Name:" HorizontalAlignment="Left" Margin="278,41,0,0" VerticalAlignment="Top"/>
                             <Image HorizontalAlignment="Left" Height="198" Margin="10,10,0,0" VerticalAlignment="Top" Width="196" Source="BlueHead.png"/>
@@ -191,10 +199,10 @@
                             </ComboBox>
                         </Grid>
                     </GroupBox>
-                    <ComboBox x:Name="teacherComboApprove" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="349" SelectedIndex="0" TabIndex="1">
+                    <ComboBox x:Name="teacherComboApprove" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="349" SelectedIndex="0" TabIndex="1" Grid.ColumnSpan="2">
                         <ComboBoxItem Content="SELECT TEACHER NAME"/>
                     </ComboBox>
-                    <Button Content="Select" HorizontalAlignment="Left" Margin="364,10,0,0" VerticalAlignment="Top" Width="75" Height="27" TabIndex="2"/>
+                    <Button Content="Select" HorizontalAlignment="Left" Margin="59,10,0,0" VerticalAlignment="Top" Width="75" Height="27" TabIndex="2" Grid.Column="1"/>
                 </Grid>
             </TabItem>
         </TabControl>

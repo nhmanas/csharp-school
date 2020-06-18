@@ -777,6 +777,88 @@ namespace School_Automation_Collab
 
             new WarningWindow(MainWindow.colorOK, "Success", "Successfully deleted student").Show();
         }
+
+        private void classInfo_click(object sender, RoutedEventArgs e)
+        {
+            var query = "select courses.*, instructors.number from courses join instructors on instructors.id = courses.instructor_id where courses.id=@id";
+            var lstParams = new List<cmdParameterType> {
+                new cmdParameterType("@id",(courseComboC.SelectedItem as ComboboxItem).Value)
+            };
+            var check = Database.query(query, lstParams);
+            if (check==null)
+            {
+                new WarningWindow(MainWindow.colorError, "DB error", "Couldnt select course info").Show();
+                return;
+            }
+            if (check.Rows.Count==0)
+            {
+                query = "select * from courses where id=@id";
+                check = Database.query(query, lstParams);
+                if (check == null)
+                {
+                    new WarningWindow(MainWindow.colorError, "DB error", "Couldnt select course info").Show();
+                    return;
+                }
+                instructornameCombo.SelectedIndex = 0;
+
+            }
+            else
+            {
+                for (int i = 1; i < instructornameCombo.Items.Count; i++)
+                {
+                    var a = (instructornameCombo.Items[i] as ComboboxItem).Value.ToString();
+                    var b = check.Rows[0]["number"].ToString();
+                    if ((instructornameCombo.Items[i] as ComboboxItem).Value.ToString()==check.Rows[0]["number"].ToString())
+                    {
+                        instructornameCombo.SelectedIndex = i;
+                        break;
+                    }
+                }
+
+            }
+            coursenameBox.Text = check.Rows[0]["name"].ToString();
+            classcodeBox.Text = check.Rows[0]["code"].ToString();
+            hoursCombo.SelectedIndex = (int)check.Rows[0]["start_end"];
+
+            
+            for (int i = 0; i < daysCombo.Items.Count; i++)
+            {
+                var a = (daysCombo.Items[i] as ComboBoxItem).Content;
+                var b = check.Rows[0]["day"];
+                if (check.Rows[0]["day"].ToString().ToLower()== (daysCombo.Items[i] as ComboBoxItem).Content.ToString())
+                {
+                    daysCombo.SelectedIndex = i;
+                    break;
+                }
+            }
+            //daysCombo.SelectedIndex
+
+
+        }
+
+        private void delete_class(object sender, RoutedEventArgs e)
+        {
+            if (courseComboC.SelectedIndex==0)
+            {
+                new WarningWindow(MainWindow.colorWarning, "Can't delete", "Please select course first", new MainWindow()).Show();
+                return;
+            }
+            var query =
+
+                @"delete from courses where id=@id;
+                delete from notes where course_id=@id";
+            var lstParams = new List<cmdParameterType> {
+                new cmdParameterType("@id",(courseComboC.SelectedItem as ComboboxItem).Value)
+            };
+            var check = Database.query(query, lstParams);
+            if (check==null)
+            {
+                new WarningWindow(MainWindow.colorError, "DB error", "Couldnt delete course").Show();
+                return;
+            }
+            new WarningWindow(MainWindow.colorOK, "Success", "Successfully deleted class and associated students' notes").Show();
+
+        }
     }
     public class ComboboxItem
     {
