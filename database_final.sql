@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jun 19, 2020 at 01:52 PM
+-- Generation Time: Jun 19, 2020 at 09:43 PM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.3.12
 
@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `access` (
   `department_id` int(12) DEFAULT NULL,
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `access`
@@ -49,11 +49,12 @@ CREATE TABLE IF NOT EXISTS `access` (
 INSERT INTO `access` (`id`, `name`, `surname`, `user_id`, `pass`, `type`, `faculty_id`, `department_id`, `updated_at`) VALUES
 (1, '666', '666', 666, '666', '0', NULL, NULL, '2020-06-18 15:45:02'),
 (2, '123', '2', 123, '123', '2', 2, 7, '2020-06-18 18:02:41'),
-(3, '111', '', 111, '111', '1', NULL, NULL, '2020-06-18 15:47:25'),
-(4, '555', '', 555, '555', '1', NULL, NULL, '2020-06-18 16:17:48'),
-(5, '222', '', 222, '222', '1', NULL, NULL, '2020-06-18 16:19:23'),
+(3, 'Teacher 1', 'Teacher 1', 111, '111', '1', 1, 1, '2020-06-19 21:41:44'),
+(4, 'Mehmet', 'Mehmet', 555, '555', '1', 2, 7, '2020-06-19 21:42:00'),
+(5, 'Mahmut', 'Eren', 222, '222', '1', 1, 2, '2020-06-19 21:42:12'),
 (7, '19', '', 19, '19', '2', NULL, NULL, '2020-06-18 18:28:15'),
-(8, '521521', '', 521521, '521521', '1', NULL, NULL, '2020-06-18 22:48:29');
+(8, '521521', '2243', 521521, '521521', '1', 1, 1, '2020-06-19 21:39:11'),
+(9, '123', '88', 1234, '123', '2', 1, 2, '2020-06-19 17:42:55');
 
 -- --------------------------------------------------------
 
@@ -234,10 +235,10 @@ CREATE TABLE IF NOT EXISTS `instructors` (
 --
 
 INSERT INTO `instructors` (`id`, `number`, `status`, `created_at`, `updated_at`) VALUES
-(1, '111', 1, '2020-06-18 15:47:25', '2020-06-18 15:47:43'),
-(2, '555', 1, '2020-06-18 16:17:48', '2020-06-18 16:17:58'),
-(3, '222', 1, '2020-06-18 16:19:23', '2020-06-18 16:19:32'),
-(4, '521521', 0, '2020-06-18 22:48:29', '2020-06-18 22:48:29');
+(1, '111', 1, '2020-06-18 15:47:25', '2020-06-19 21:41:44'),
+(2, '555', 1, '2020-06-18 16:17:48', '2020-06-19 21:42:00'),
+(3, '222', 1, '2020-06-18 16:19:23', '2020-06-19 21:42:12'),
+(4, '521521', 1, '2020-06-18 22:48:29', '2020-06-19 21:42:18');
 
 -- --------------------------------------------------------
 
@@ -279,7 +280,7 @@ CREATE TABLE IF NOT EXISTS `students` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `students`
@@ -287,7 +288,8 @@ CREATE TABLE IF NOT EXISTS `students` (
 
 INSERT INTO `students` (`id`, `number`, `year`, `created_at`, `updated_at`) VALUES
 (1, '123', '2020', '2020-06-18 15:46:13', '2020-06-18 18:02:41'),
-(3, '19', '2020', '2020-06-18 18:28:15', '2020-06-18 18:28:15');
+(3, '19', '2020', '2020-06-18 18:28:15', '2020-06-18 18:28:15'),
+(4, '1234', '2020', '2020-06-19 17:35:45', '2020-06-19 17:35:45');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
