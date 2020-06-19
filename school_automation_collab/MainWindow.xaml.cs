@@ -90,7 +90,6 @@ namespace School_Automation_Collab
             a = e;
             signinTab.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString(colorActive));
             loginButton.Visibility = Visibility.Visible;
-            rememberCheck.Visibility = Visibility.Visible;
             signupTab.Effect = new BlurEffect();
             if (isClickedUp == 1)
             {
@@ -151,7 +150,6 @@ namespace School_Automation_Collab
             a = e;
             signupTab.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString(colorActive));
             loginButton.Visibility = Visibility.Hidden;
-            rememberCheck.Visibility = Visibility.Hidden;
             if (isClickedIn == 1)
             {
                 isClickedIn = 0;

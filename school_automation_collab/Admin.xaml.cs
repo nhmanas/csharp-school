@@ -95,6 +95,7 @@ namespace School_Automation_Collab
                 facultyCombo.Items.Add(item);
                 facultyComboC.Items.Add(item);
                 studentfacultyComboC.Items.Add(item);
+                teacherfacultyComboC.Items.Add(item);
             }
             
 
@@ -467,8 +468,20 @@ namespace School_Automation_Collab
                 new WarningWindow(MainWindow.colorWarning, "Selection Needed", "Select a teacher to continue").Show();
                 return;
             }
-            var query = "update instructors set status=1 where number=@number";
-            var lstParams = new List<cmdParameterType> { new cmdParameterType("@number", teacherComboApprove.SelectedItem) };
+            if (teacherfacultyComboC.SelectedIndex==0 || teacherdepartmentComboC.SelectedIndex==0 || teacherNameBox.Text=="" || teacherSurnameBox.Text=="")
+            {
+                new WarningWindow(MainWindow.colorWarning, "Fill all", "Fill all the necessary platforms").Show();
+                return;
+            }
+            var query = @"update instructors set status=1 where number=@number; 
+                        update access set name=@name, surname=@surname, faculty_id=@faculty_id, department_id=@department_id where user_id=@number";
+            var lstParams = new List<cmdParameterType> { 
+                new cmdParameterType("@number", teacherComboApprove.SelectedItem),
+                new cmdParameterType("@name", teacherNameBox.Text),
+                new cmdParameterType("@surname", teacherSurnameBox.Text),
+                new cmdParameterType("@faculty_id", (teacherfacultyComboC.SelectedItem as ComboboxItem).Value),
+                new cmdParameterType("@department_id", (teacherdepartmentComboC.SelectedItem as ComboboxItem).Value),
+            };
             var check = Database.query(query, lstParams);
             if (check==null)
             {
@@ -483,6 +496,7 @@ namespace School_Automation_Collab
             {
                 return;
             }
+            teacherComboApprove_Changed(sender, e);
             new WarningWindow(MainWindow.colorOK, "Success", "Teacher Approved").Show();
 
 
@@ -692,6 +706,64 @@ namespace School_Automation_Collab
                 }
             }
             
+        }
+        private void teacherfacultyComboC_Changed(object sender, EventArgs e)
+        {
+            if (!initFinished)
+            {
+                return;
+            }
+
+            teacherdepartmentComboC.SelectedIndex = 0;
+            int departmentCount = teacherdepartmentComboC.Items.Count - 1;
+            for (int i = 0; i < departmentCount; i++)
+            {
+                teacherdepartmentComboC.Items.Remove(teacherdepartmentComboC.Items[1]);
+            }
+
+
+            if (teacherfacultyComboC.SelectedIndex != 0)
+            {
+                foreach (DataRow departmentListItem in departmentList.Rows)
+                {
+                    if ((teacherfacultyComboC.SelectedItem as ComboboxItem).Value.ToString() == departmentListItem["faculty_id"].ToString())
+                    {
+                        ComboboxItem item = new ComboboxItem();
+                        item.Text = departmentListItem["name"].ToString();
+                        item.Value = departmentListItem["id"];
+                        teacherdepartmentComboC.Items.Add(item);
+                    }
+
+
+                }
+            } 
+        }
+        private void teacherComboApprove_Changed(object sender, EventArgs e)
+        {
+            if (teacherComboApprove.SelectedIndex==0)
+            {
+                teacherNameBox.Text = "";
+                teacherSurnameBox.Text = "";
+                idnumberLabel2.Content = "";
+                teacherfacultyComboC.SelectedIndex = 0;
+                teacherfacultyComboC_Changed(sender, e);
+                return;
+            }
+            var query = "select * from access where user_id=@user_id";
+            var lstParams = new List<cmdParameterType>
+            {
+                new cmdParameterType("@user_id",teacherComboApprove.SelectedItem)
+            };
+            var check = Database.query(query, lstParams);
+            if (check==null)
+            {
+                new WarningWindow(MainWindow.colorError, "DB error", "Couldnt get info from the teacher").Show();
+                teacherComboApprove.SelectedIndex = 0;
+                return;
+            }
+            teacherNameBox.Text = check.Rows[0]["name"].ToString();
+            teacherSurnameBox.Text = check.Rows[0]["surname"].ToString();
+            idnumberLabel2.Content = check.Rows[0]["user_id"].ToString();
         }
 
         private void update_Student_Click(object sender, RoutedEventArgs e)
@@ -1097,6 +1169,8 @@ namespace School_Automation_Collab
             new WarningWindow(MainWindow.colorOK, "Success", "Successfully added class").Show();
 
         }
+
+        
     }
     public class ComboboxItem
     {

@@ -26,7 +26,7 @@
                             <Label Content="Faculty:" HorizontalAlignment="Left" Margin="272,134,0,0" VerticalAlignment="Top"/>
                             <Label x:Name="facultyLabel" Content="VERY_LONG_FACULTY_LABEL" HorizontalAlignment="Left" Margin="357,134,0,0" VerticalAlignment="Top"/>
                             <Label Content="Title:" HorizontalAlignment="Left" Margin="290,10,0,0" VerticalAlignment="Top"/>
-                            <Label x:Name="titleLabel" Content="prof, doç, falan ya da admin gelecek" HorizontalAlignment="Left" Margin="357,10,0,0" VerticalAlignment="Top"/>
+                            <Label x:Name="titleLabel" Content="Teacher" HorizontalAlignment="Left" Margin="357,10,0,0" VerticalAlignment="Top"/>
                         </Grid>
                     </GroupBox>
                     <GroupBox Header="Weekly schedule" HorizontalAlignment="Left" Height="280" Margin="10,260,0,0" VerticalAlignment="Top" Width="936">
