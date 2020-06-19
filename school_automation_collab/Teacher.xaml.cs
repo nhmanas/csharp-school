@@ -99,7 +99,7 @@ namespace School_Automation_Collab
             }
 
         }
-        public void class_morning_afternoon(int clock, Label morning, Label afternoon,string text)
+        public static void class_morning_afternoon(int clock, Label morning, Label afternoon,string text)
         {
             switch (clock)
             {
