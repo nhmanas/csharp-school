@@ -19,16 +19,15 @@
 
         </TextBlock>
         <TextBlock HorizontalAlignment="Left" Margin="724,141,0,0" TextWrapping="Wrap" Text="or" VerticalAlignment="Top" FontSize="36" TextDecorations="{x:Null}" Foreground="#FF569DE5"/>
-        <TextBox x:Name="idBox" HorizontalAlignment="Left" Height="29" Margin="553,279,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="390" FontSize="18" Background="#FF1976D3" BorderBrush="White" BorderThickness="5,1,1,1" Foreground="White" TabIndex="0"/>
+        <TextBox Text="" x:Name="idBox" HorizontalAlignment="Left" Height="29" Margin="553,279,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="390" FontSize="18" Background="#FF1976D3" BorderBrush="White" BorderThickness="5,1,1,1" Foreground="White" TabIndex="0"/>
         <TextBlock x:Name="idLabel_signin" HorizontalAlignment="Left" Margin="553,241,0,0" TextWrapping="Wrap" Text="ID Number: " VerticalAlignment="Top" FontSize="16" TextDecorations="{x:Null}" Foreground="#FFFFFFFF"/>
         <TextBlock x:Name="pwLabel_signin" HorizontalAlignment="Left" Margin="553,347,0,0" TextWrapping="Wrap" Text="Password:" VerticalAlignment="Top" FontSize="16" TextDecorations="{x:Null}" Foreground="#FFFFFFFF"/>
         <Label Content="Welcome" HorizontalAlignment="Left" Margin="169,50,0,0" VerticalAlignment="Top" FontSize="36" Foreground="#FF464646"/>
         <Label Content="This is Toros University" HorizontalAlignment="Left" Margin="117,507,0,0" VerticalAlignment="Top" FontSize="25" Foreground="#FF464646"/>
         <Label Content="SAIS" HorizontalAlignment="Left" Margin="203,555,0,0" VerticalAlignment="Top" FontSize="36" Foreground="#FF464646"/>
-        <CheckBox x:Name="rememberCheck" Content="Remember me" HorizontalAlignment="Left" Margin="554,436,0,0" VerticalAlignment="Top" Foreground="White"/>
         <Button x:Name="loginButton" Content="Login" HorizontalAlignment="Left" Margin="827,427,0,0" VerticalAlignment="Top" Width="116" Background="#FF1976D3" FontSize="16" BorderBrush="White" Foreground="White" Height="29" Click="loginButton_Click" TabIndex="2"/>
         <Image HorizontalAlignment="Left" Height="330" Margin="80,143,0,0" VerticalAlignment="Top" Width="341" Source="toros.png"/>
-        <PasswordBox x:Name="pwBox" HorizontalAlignment="Left" Margin="554,385,0,0" VerticalAlignment="Top" Width="389" Height="29" FontSize="18" Background="#FF1976D3" BorderBrush="White" Foreground="White" BorderThickness="5,1,1,1" TabIndex="1"/>
+        <PasswordBox x:Name="pwBox" HorizontalAlignment="Left" Margin="554,385,0,0" VerticalAlignment="Top" Width="389" Height="29" FontSize="18" Background="#FF1976D3" BorderBrush="White" Foreground="White" BorderThickness="5,1,1,1" TabIndex="1" Password=""/>
         <Rectangle x:Name="warningBox" Fill="#FFD31919" HorizontalAlignment="Left" Height="77" Margin="553,507,0,0" Stroke="White" VerticalAlignment="Top" Width="390"/>
         <Label x:Name="warningLabel" Content="WARNING" HorizontalAlignment="Left" Margin="568,528,0,0" VerticalAlignment="Top" FontSize="16" Foreground="White"/>
         <TextBox x:Name="signupIdBox" HorizontalAlignment="Left" Height="29" Margin="553,253,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="390" FontSize="18" Background="#FF1976D3" BorderBrush="White" BorderThickness="5,1,1,1" Foreground="White" Visibility="Hidden" TabIndex="3"/>
@@ -42,10 +41,6 @@
             <ComboBoxItem Content="Student" IsSelected="True"/>
             <ComboBoxItem Content="Teacher"/>
         </ComboBox>
-        <Button Content="Student" HorizontalAlignment="Left" Margin="554,482,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
-        <Button Content="Student" HorizontalAlignment="Left" Margin="554,482,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
-        <Button Content="Teacher" HorizontalAlignment="Left" Margin="634,482,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_1"/>
-        <Button Content="Admin" HorizontalAlignment="Left" Margin="714,482,0,0" VerticalAlignment="Top" Width="76" Click="Button_Click_2"/>
 
     </Grid>
 </Window>
