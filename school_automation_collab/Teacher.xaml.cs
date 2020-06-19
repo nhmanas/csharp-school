@@ -23,16 +23,17 @@ namespace School_Automation_Collab
     public partial class Teacher : Window
     {
         DataTable courseList = new DataTable();
+        int instructorID;
         public Teacher()
         {
             InitializeComponent();
         }
-        public Teacher(string name,string surname,string id,string faculty,string department)
+        public Teacher(string name,string surname,string number,string faculty,string department)
         {
             InitializeComponent();
             nameLabel.Content = name;
             surnameLabel.Content = surname;
-            idnumberLabel.Content = id;
+            idnumberLabel.Content = number;
             var query = "";
             DataRow departmentName;
 
@@ -43,7 +44,7 @@ namespace School_Automation_Collab
             else
             {
                 query = $"select * from departments where id={department}";
-                departmentName = Database.query(query, new List<cmdParameterType>()).Rows[0];
+                departmentName = Database.query(query).Rows[0];
                 departmentLabel.Content = departmentName["name"];
 
             }
@@ -54,12 +55,14 @@ namespace School_Automation_Collab
             else
             {
                 query = $"select * from faculties where id={faculty}";
-                var facultyName = Database.query(query, new List<cmdParameterType>()).Rows[0];
+                var facultyName = Database.query(query).Rows[0];
                 facultyLabel.Content = facultyName["name"];
             }
+            
 
-            query = "select * from courses where instructor_id=@id";
-            var lstParams = new List<cmdParameterType> { new cmdParameterType("@id", id) };
+
+            query = "select * from courses join instructors on courses.instructor_id = instructors.id where instructors.number=@id";
+            var lstParams = new List<cmdParameterType> { new cmdParameterType("@id", number) };
             var check = Database.query(query, lstParams);
             if (check==null)
             {
@@ -69,9 +72,46 @@ namespace School_Automation_Collab
             courseList = check;
             foreach (DataRow item in courseList.Rows)
             {
-                selectcourseCombo.Items.Add(item["name"].ToString());
+                ComboboxItem comboItem = new ComboboxItem();
+                comboItem.Text = item["name"].ToString();
+                comboItem.Value = item["id"];
+                selectcourseCombo.Items.Add(comboItem);
+                switch (item["day"].ToString().ToLower())
+                {
+                    case "monday":
+                        class_morning_afternoon((int)item["start_end"], mon1, mon2, item["code"].ToString()+ "\n"+ item["name"].ToString());
+                        break;
+                    case "tuesday":
+                        class_morning_afternoon((int)item["start_end"], tue1, tue2, item["code"].ToString() + "\n" + item["name"].ToString());
+                        break;
+                    case "wednesday":
+                        class_morning_afternoon((int)item["start_end"], wed1, wed2, item["code"].ToString() + "\n" + item["name"].ToString());
+                        break;
+                    case "thursday":
+                        class_morning_afternoon((int)item["start_end"], thu1, thu2, item["code"].ToString() + "\n" + item["name"].ToString());
+                        break;
+                    case "friday":
+                        class_morning_afternoon((int)item["start_end"], fri1, fri2, item["code"].ToString() + "\n" + item["name"].ToString());
+                        break;
+                    default:
+                        break;
+                }
             }
 
+        }
+        public void class_morning_afternoon(int clock, Label morning, Label afternoon,string text)
+        {
+            switch (clock)
+            {
+                case 1:
+                    morning.Content = text;
+                    break;
+                case 2:
+                    afternoon.Content = text;
+                    break;
+                default:
+                    break;
+            }
         }
 
 
@@ -85,6 +125,21 @@ namespace School_Automation_Collab
         {
             new WarningWindow(MainWindow.colorOK, "OK", "Logout successfull", new MainWindow());
             this.Close();
+        }
+
+        private void selectcourseCombo_changed(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void courseStudents_Clicked(object sender, RoutedEventArgs e)
+        {
+            /*if (selectcourseCombo.SelectedIndex==0)
+            {
+                new WarningWindow("")
+            }
+            string courseID = (selectcourseCombo.SelectedItem as ComboboxItem).Value.ToString();
+            var query = "select * from notes where "*/
         }
     }
 }

@@ -38,16 +38,16 @@
                             <Label Content="Fri" HorizontalAlignment="Left" Margin="792,10,0,0" VerticalAlignment="Top" Width="93" HorizontalContentAlignment="Center" Foreground="White"/>
                             <Label Content="09:00 - 12:00" HorizontalAlignment="Left" Margin="10,57,0,0" VerticalAlignment="Top" Foreground="White"/>
                             <Label Content="13:00 - 16:00" HorizontalAlignment="Left" Margin="10,190,0,0" VerticalAlignment="Top" Foreground="White"/>
-                            <Label x:Name="mon1" Content="Label" HorizontalAlignment="Left" Margin="164,46,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="52" Width="146" Foreground="White"/>
-                            <Label x:Name="tue1" Content="Label" HorizontalAlignment="Left" Margin="315,46,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="52" Width="146" Foreground="White"/>
-                            <Label x:Name="wed1" Content="Label" HorizontalAlignment="Left" Margin="466,46,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="52" Width="146" Foreground="White"/>
-                            <Label x:Name="thu1" Content="Label" HorizontalAlignment="Left" Margin="617,46,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="52" Width="146" Foreground="White"/>
-                            <Label x:Name="fri1" Content="Label" HorizontalAlignment="Left" Margin="768,46,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="52" Width="146" Foreground="White"/>
-                            <Label x:Name="mon2" Content="Label" HorizontalAlignment="Left" Margin="164,179,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="52" Width="146" Foreground="White"/>
-                            <Label x:Name="tue2" Content="Label" HorizontalAlignment="Left" Margin="315,179,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="52" Width="146" Foreground="White"/>
-                            <Label x:Name="wed2" Content="Label" HorizontalAlignment="Left" Margin="466,179,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="52" Width="146" Foreground="White"/>
-                            <Label x:Name="thu2" Content="Label" HorizontalAlignment="Left" Margin="617,179,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="52" Width="146" Foreground="White"/>
-                            <Label x:Name="fri2" Content="Label" HorizontalAlignment="Left" Margin="768,179,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="52" Width="146" Foreground="White"/>
+                            <Label x:Name="mon1" Content="" HorizontalAlignment="Left" Margin="164,46,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="52" Width="146" Foreground="White"/>
+                            <Label x:Name="tue1" Content="" HorizontalAlignment="Left" Margin="315,46,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="52" Width="146" Foreground="White"/>
+                            <Label x:Name="wed1" Content="" HorizontalAlignment="Left" Margin="466,46,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="52" Width="146" Foreground="White"/>
+                            <Label x:Name="thu1" Content="" HorizontalAlignment="Left" Margin="617,46,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="52" Width="146" Foreground="White"/>
+                            <Label x:Name="fri1" Content="" HorizontalAlignment="Left" Margin="768,46,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="52" Width="146" Foreground="White"/>
+                            <Label x:Name="mon2" Content="" HorizontalAlignment="Left" Margin="164,179,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="52" Width="146" Foreground="White"/>
+                            <Label x:Name="tue2" Content="" HorizontalAlignment="Left" Margin="315,179,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="52" Width="146" Foreground="White"/>
+                            <Label x:Name="wed2" Content="" HorizontalAlignment="Left" Margin="466,179,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="52" Width="146" Foreground="White"/>
+                            <Label x:Name="thu2" Content="" HorizontalAlignment="Left" Margin="617,179,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="52" Width="146" Foreground="White"/>
+                            <Label x:Name="fri2" Content="" HorizontalAlignment="Left" Margin="768,179,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="52" Width="146" Foreground="White"/>
                             <Label Content="12:00 - 13:00" HorizontalAlignment="Left" Margin="10,124,0,0" VerticalAlignment="Top" Foreground="White"/>
 
                             <Label Content="Label" HorizontalAlignment="Left" Margin="0,109,0,0" VerticalAlignment="Top" Width="924" Background="White" Foreground="White" ForceCursor="True" Height="2"/>
@@ -66,16 +66,21 @@
             </TabItem>
             <TabItem x:Name="tabExam" Header="Grade students">
                 <Grid Background="#FFFFFFFF">
-                    <DataGrid x:Name="gradestudentsGrid" HorizontalAlignment="Left" Height="498" Margin="10,42,0,0" VerticalAlignment="Top" Width="936"/>
-                    <TextBox x:Name="finalgradeBox" HorizontalAlignment="Left" Height="27" Margin="830,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="36"/>
-                    <Button x:Name="savegradeButton" Content="Update" HorizontalAlignment="Left" Margin="871,10,0,0" VerticalAlignment="Top" Width="75" Height="27"/>
-                    <ComboBox HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="388" SelectedIndex="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="29*"/>
+                        <ColumnDefinition Width="927*"/>
+                    </Grid.ColumnDefinitions>
+                    <DataGrid IsReadOnly="True" x:Name="gradestudentsGrid" HorizontalAlignment="Left" Height="498" Margin="10,42,0,0" VerticalAlignment="Top" Width="936" Grid.ColumnSpan="2"/>
+                    <TextBox x:Name="finalgradeBox" HorizontalAlignment="Left" Height="27" Margin="800.774,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="36" Grid.Column="1"/>
+                    <Button x:Name="savegradeButton" Content="Update" HorizontalAlignment="Left" Margin="841.774,10,0,0" VerticalAlignment="Top" Width="75" Height="27" Grid.Column="1"/>
+                    <ComboBox HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="388" SelectedIndex="0" Grid.ColumnSpan="2">
                         <ComboBoxItem Content="SELECT COURSE"/>
                     </ComboBox>
-                    <TextBox x:Name="midtermgradeBox" HorizontalAlignment="Left" Height="27" Margin="789,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="36"/>
-                    <ComboBox x:Name="selectcourseCombo" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="388" SelectedIndex="0">
+                    <TextBox x:Name="midtermgradeBox" HorizontalAlignment="Left" Height="27" Margin="759.774,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="36" Grid.Column="1"/>
+                    <ComboBox x:Name="selectcourseCombo" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="388" SelectedIndex="0" Grid.ColumnSpan="2" DropDownClosed="selectcourseCombo_changed">
                         <ComboBoxItem Content="SELECT COURSE"/>
                     </ComboBox>
+                    <Button x:Name="courseStudents" Content="List students" HorizontalAlignment="Left" Margin="374,10,0,0" VerticalAlignment="Top" Width="148" Height="27" Grid.Column="1"/>
                 </Grid>
             </TabItem>
         </TabControl>
