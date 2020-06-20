@@ -123,7 +123,7 @@ namespace School_Automation_Collab
 
         private void logoutButton_Click(object sender, RoutedEventArgs e)
         {
-            new WarningWindow(MainWindow.colorOK, "OK", "Logout successfull", new MainWindow());
+            new WarningWindow(MainWindow.colorOK, "OK", "Logout successfull", new MainWindow()).Show();
             this.Close();
         }
         private void selectcourseCombo_changed(object sender, EventArgs e)
