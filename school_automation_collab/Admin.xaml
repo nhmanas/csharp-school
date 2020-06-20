@@ -98,7 +98,7 @@
                                 <ComboBoxItem Content="Select Instructor"/>
                             </ComboBox>
                             <Button x:Name="addclassButton" Content="Add Class" HorizontalAlignment="Left" Margin="178,461,0,0" VerticalAlignment="Top" Background="#FF1976D3" Foreground="White" Width="124" Height="31" Click="add_class" TabIndex="13"/>
-                            <Label Content="Available hours: " HorizontalAlignment="Left" Margin="10,132,0,0" VerticalAlignment="Top"/>
+                            <Label Content="Available day: " HorizontalAlignment="Left" Margin="24,134,0,0" VerticalAlignment="Top"/>
                             <ComboBox x:Name="daysCombo" HorizontalAlignment="Left" Margin="140,134,0,0" VerticalAlignment="Top" Width="318" SelectedIndex="0" TabIndex="8">
                                 <ComboBoxItem Content="monday"/>
                                 <ComboBoxItem Content="tuesday"/>
